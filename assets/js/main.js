@@ -1307,7 +1307,7 @@ function initAIChatSupport() {
         'contact', 'call', 'phone', 'number', 'whatsapp', 'talk', 'human', 'director', 'agent',
         'person', 'speak', 'email', 'office', 'reach'
       ],
-      reply: '<strong>Connect Directly With Our Managing Partner</strong>:<ul><li><strong>K. Sreedhar (Direct):</strong> +91 98853 35559</li><li><strong>WhatsApp Desk:</strong> Instant response for availability &amp; rate sheets</li><li><strong>Email:</strong> brandvisionhyd@gmail.com</li><li><strong>Corporate Registered Office:</strong> Flat No. 105, Aneesh Towers, Padmarao Nagar, Secunderabad - 500 025, Telangana</li><li><strong>Response Time:</strong> Quotation and site specs provided within 2 business hours</li></ul>',
+      reply: '<strong>Connect Directly With Our Managing Partner</strong>:<ul><li><strong>K. Sreedhar (Direct):</strong> +91 98853 35559</li><li><strong>WhatsApp Desk:</strong> Instant response for availability &amp; rate sheets</li><li><strong>Email:</strong> info@brandvisionhyd.com</li><li><strong>Corporate Registered Office:</strong> Flat No. 105, Aneesh Towers, Padmarao Nagar, Secunderabad - 500 025, Telangana</li><li><strong>Response Time:</strong> Quotation and site specs provided within 2 business hours</li></ul>',
       chips: [
         { label: 'Chat on WhatsApp', href: 'https://wa.me/919885335559' },
         { label: 'Call +91 98853 35559', href: 'tel:+919885335559' },
