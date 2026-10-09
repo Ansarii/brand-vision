@@ -1,7 +1,7 @@
 {
   "name": "brand-vision-media",
   "version": "2026.10.6",
-  "description": "Brand Vision Media — Premier Airport & Outdoor Advertising Network in Hyderabad",
+  "description": "Brand Vision Media - Premier Airport & Outdoor Advertising Network in Hyderabad",
   "private": true,
   "scripts": {
     "audit": "python3 scripts/devops_audit.py",

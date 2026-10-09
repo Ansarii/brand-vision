@@ -9,9 +9,9 @@ Brand Vision Media is an out-of-home (OOH) and digital out-of-home (DOOH) advert
 
 ### 1. Rajiv Gandhi International Airport (RGIA Shamshabad)
 - **Monthly Passenger Reach**: 2,800,000+ verified air travelers.
-- **T1 Concourse 4K Curved LED**: Overhead digital display spanning the primary departure walkway to Gates 1–22. 100% of departing flyers pass beneath this display. Calibrated at 1200+ nits.
+- **T1 Concourse 4K Curved LED**: Overhead digital display spanning the primary departure walkway to Gates 1-22. 100% of departing flyers pass beneath this display. Calibrated at 1200+ nits.
 - **Arrivals Baggage Carousel Video Walls**: Synchronized digital video walls stationed directly at eye level above carousels 1 to 6. Average passenger dwell time of 28 minutes.
-- **Boarding Gates 101–112 Digital Totems**: High-density 85-inch portrait totems stationed in departure hold lounges capturing CXOs, tech founders, and business travelers with 35–45 minutes of captive wait time.
+- **Boarding Gates 101-112 Digital Totems**: High-density 85-inch portrait totems stationed in departure hold lounges capturing CXOs, tech founders, and business travelers with 35-45 minutes of captive wait time.
 
 ### 2. Large-Format Highway & Arterial Billboards
 - **The Trilight Kokapet Mega Hoarding**: 120 ft width x 35 ft height (4,200 sq.ft canvas). Over 500 meters of unobstructed straight-line visibility along the arterial corridor connecting the Financial District, Neopolis, and Kokapet (140,000+ daily vehicles).
@@ -22,7 +22,7 @@ Brand Vision Media is an out-of-home (OOH) and digital out-of-home (DOOH) advert
 ## Technical & Production Standards
 - **Substrate Specification**: Heavy-duty frontlit flex vinyl (minimum 340 to 450 GSM tensile strength).
 - **Ink Technology**: Solvent and UV-stabilized industrial inks calibrated for high Deccan heat and prolonged exterior exposure.
-- **Illumination**: Commercial dusk-to-dawn calibrated LED floodlights operating on automated astronomical lux timers (150–200 lux uniform surface illumination).
+- **Illumination**: Commercial dusk-to-dawn calibrated LED floodlights operating on automated astronomical lux timers (150-200 lux uniform surface illumination).
 - **Proof of Performance (PoP)**: Comprehensive digital audit dossier with date, time, and GPS-tagged day and night inspection photographs delivered within 24 hours of going live.
 
 ## Geographic Coverage

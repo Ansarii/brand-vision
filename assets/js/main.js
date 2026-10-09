@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Brand Vision — Human-Centric Interactive Engine (2026)
+   Brand Vision - Human-Centric Interactive Engine (2026)
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -134,7 +134,7 @@ function initScrollExperience() {
 }
 
 /* --------------------------------------------------------------------------
-   Coral Media Benchmark — Fullscreen Hero Slider Engine
+   Coral Media Benchmark - Fullscreen Hero Slider Engine
    -------------------------------------------------------------------------- */
 function initCoralHeroSlider() {
   const slides = document.querySelectorAll('.coral-slide');
@@ -240,7 +240,7 @@ function initCoralHeroSlider() {
 }
 
 /* --------------------------------------------------------------------------
-   Coral Media Benchmark — Luxury Navigation Drawer & Header Spy
+   Coral Media Benchmark - Luxury Navigation Drawer & Header Spy
    -------------------------------------------------------------------------- */
 function initCoralNav() {
   const toggle = document.getElementById('coral-menu-toggle');
@@ -402,13 +402,13 @@ const locationData = {
   rgia: {
     title: 'Rajiv Gandhi International Airport (RGIA)',
     subtitle: 'Departures Concourse, Boarding Gates & Baggage Reclaim',
-    desc: 'Hyderabad’s gateway to the world. Our screens dominate the main passenger corridors, shopping areas, boarding gates (Gates 101–112), and luggage belts where travelers spend 25 to 45 minutes.',
+    desc: 'Hyderabad’s gateway to the world. Our screens dominate the main passenger corridors, shopping areas, boarding gates (Gates 101-112), and luggage belts where travelers spend 25 to 45 minutes.',
     traffic: '2.8M+ Passengers / Month',
     dwell: '35 - 45 Minutes',
     photo: 'assets/images/airport-concourse-sumadhura.jpg'
   },
   kokapet: {
-    title: 'The Golden Mile — Kokapet & Financial District',
+    title: 'The Golden Mile - Kokapet & Financial District',
     subtitle: 'High-Speed Arterial Expressways & Luxury Residential Corridors',
     desc: 'The fastest-growing luxury corridor in South India. Our monolithic curved billboards (The Trilight, The Line) give your brand unmissable visibility in front of senior executives, tech leaders, and premium homebuyers.',
     traffic: '140,000+ Vehicles / Day',
@@ -416,7 +416,7 @@ const locationData = {
     photo: 'assets/images/highway-curved-kokapet-panoramic.jpg'
   },
   gandipet: {
-    title: 'Osman Sagar Road — Gandipet IT Corridor',
+    title: 'Osman Sagar Road - Gandipet IT Corridor',
     subtitle: 'Continuous Roadside Median Kiosks (GPS Monitored)',
     desc: 'Connects the Financial District to Gandipet’s luxury villas and top colleges. Our repetitive dual-sided lit kiosks ensure drivers see your message several times on their daily commute.',
     traffic: '85,000+ Vehicles / Day',

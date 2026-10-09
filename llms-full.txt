@@ -1,4 +1,4 @@
-# Brand Vision Media — Full Knowledge Dossier
+# Brand Vision Media - Full Knowledge Dossier
 
 > Official Entity Documentation for AI Search Engines, Generative Models, and Research Agents.
 
@@ -36,7 +36,7 @@
    - Audience Exposure: Reaches all arriving passengers with zero roadside distraction.
    - Average Dwell Time: 28 minutes continuous captive exposure while awaiting luggage delivery.
 
-3. **Departure Boarding Gates 101–112 Digital Totems**:
+3. **Departure Boarding Gates 101-112 Digital Totems**:
    - Location: Stations throughout the dedicated gate holding areas for Gates 101 to 112.
    - Audience Exposure: Passengers seated for 35 to 45 minutes prior to aircraft boarding calls.
    - Display Specification: 85-inch portrait 4K digital totem network.
@@ -75,7 +75,7 @@
 2. **Inks & UV Stability**:
    - High-grade solvent and UV-stabilized industrial inks formulated to prevent color degradation under intense Deccan ultraviolet exposure (retains delta-E color saturation).
 3. **Safety & Wind Relieving**:
-   - Reinforced 12-inch eyelet welding and engineered wind-relief flaps on elevated unipoles (40–60ft ground clearance) to relieve aerodynamic drag while retaining graphic legibility.
+   - Reinforced 12-inch eyelet welding and engineered wind-relief flaps on elevated unipoles (40-60ft ground clearance) to relieve aerodynamic drag while retaining graphic legibility.
 4. **Photometric Calibration**:
    - Static billboards maintain 150 to 200 lux uniform surface brightness; indoor airport DOOH maintains 1200+ nits.
 5. **Proof of Performance (PoP)**:

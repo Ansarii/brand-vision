@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Brand Vision — Clean, Modern, Human-Centric Design System (2026)
+   Brand Vision - Clean, Modern, Human-Centric Design System (2026)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
@@ -2151,7 +2151,7 @@ html, body {
 }
 
 /* ==========================================================================
-   COLOR LAYER — Official Brand Vision Royal Purple & Brand Orange System
+   COLOR LAYER - Official Brand Vision Royal Purple & Brand Orange System
    ========================================================================== */
 :root {
   --ink: #14092b;                 /* deep violet ink instead of harsh black */
@@ -2525,7 +2525,7 @@ section[id] { scroll-margin-top: 90px; }
 }
 
 /* ==========================================================================
-   LOGO — clean alignment, tagline always on one line
+   LOGO - clean alignment, tagline always on one line
    ========================================================================== */
 .brand-link {
   flex-shrink: 0;
@@ -2569,7 +2569,7 @@ section[id] { scroll-margin-top: 90px; }
 }
 
 /* ==========================================================================
-   NAV — five main links, centered, single CTA
+   NAV - five main links, centered, single CTA
    ========================================================================== */
 .header-container { gap: 24px; }
 .nav-wrapper { flex: 1; justify-content: center; }
@@ -3034,8 +3034,8 @@ section[id] { scroll-margin-top: 90px; }
   @keyframes heroZoom { from { transform: scale(1.12); } to { transform: scale(1); } }
 }
 
-/* 4. Reveal on scroll — plays once, staggered within each group */
-/* 4. Reveal on scroll — non-blocking, smooth, zero lag */
+/* 4. Reveal on scroll - plays once, staggered within each group */
+/* 4. Reveal on scroll - non-blocking, smooth, zero lag */
 .js [data-reveal] {
   opacity: 0.95;
   transform: translateY(6px);
@@ -3053,7 +3053,7 @@ section[id] { scroll-margin-top: 90px; }
 
 /* ==========================================================================
 /* ==========================================================================
-   5. Unified Brand Trust Showcase — Dynamic Multi-Row Infinite Marquee
+   5. Unified Brand Trust Showcase - Dynamic Multi-Row Infinite Marquee
    ========================================================================== */
 .trust-showcase-section,
 #clients {
@@ -3278,7 +3278,7 @@ section[id] { scroll-margin-top: 90px; }
 }
 
 /* ==========================================================================
-   CORAL MEDIA BENCHMARK — CLEAN HEADER & FULLSCREEN CINEMATIC SLIDER
+   CORAL MEDIA BENCHMARK - CLEAN HEADER & FULLSCREEN CINEMATIC SLIDER
    ========================================================================== */
 .coral-site-header {
   position: sticky;
@@ -3770,7 +3770,7 @@ section[id] { scroll-margin-top: 90px; }
   100% { width: 100%; }
 }
 
-/* Quick Stats Bar — High-End Glassmorphic Broadcast Chyron (Desktop) */
+/* Quick Stats Bar - High-End Glassmorphic Broadcast Chyron (Desktop) */
 .coral-slider-stats {
   position: relative;
   z-index: 10;

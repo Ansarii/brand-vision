@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Brand Vision — Automated DevOps Quality & Invariant Audit Suite (October 2026)
+Brand Vision - Automated DevOps Quality & Invariant Audit Suite (October 2026)
 Validates frontend integrity, assets, business invariants, SEO, and performance standards.
 """
 
@@ -126,7 +126,22 @@ for fname in emoji_files:
 if not emojis_found:
     pass_check("Zero Emojis Invariant: 100% clean across all HTML, CSS, JS, and LLM text files")
 
-# 4. Business Invariant: Sole Partner Compliance
+# 4. Business Invariant: Zero Em Dashes
+em_dash_files = ["index.html", "assets/css/style.css", "assets/js/main.js", "llms.txt", "llms-full.txt", "package.json", "robots.txt"]
+em_dashes_found = []
+for fname in em_dash_files:
+    if os.path.exists(fname):
+        with open(fname, "r", encoding="utf-8") as f:
+            c = f.read()
+        if "\u2014" in c:
+            em_dashes_found.append((fname, c.count("\u2014")))
+
+if not em_dashes_found:
+    pass_check("Zero Em Dash Invariant: 100% clean across all project text and markup files")
+else:
+    fail_check("Zero Em Dash Invariant", f"Found em dash in files: {em_dashes_found}")
+
+# 5. Business Invariant: Sole Partner Compliance
 purged_names = ["Radhika", "Vamsi Krishna", "Vamsi"]
 partner_violations = []
 for p in purged_names:
