@@ -410,7 +410,7 @@ const locationData = {
   kokapet: {
     title: 'The Golden Mile - Kokapet & Financial District',
     subtitle: 'High-Speed Arterial Expressways & Luxury Residential Corridors',
-    desc: 'The fastest-growing luxury corridor in South India. Our monolithic curved billboards (The Trilight, The Line) give your brand unmissable visibility in front of senior executives, tech leaders, and premium homebuyers.',
+    desc: 'The fastest-growing luxury corridor in South India. Our curved arterial billboards (The Trilight, The Line) give your brand unmissable visibility in front of senior executives, tech leaders, and premium homebuyers.',
     traffic: '140,000+ Vehicles / Day',
     dwell: '500m Clear Sightline',
     photo: 'assets/images/highway-curved-kokapet-panoramic.jpg'
@@ -1158,7 +1158,7 @@ function initAIChatSupport() {
         'hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening',
         'namaste', 'start', 'help', 'who are you', 'what is this'
       ],
-      reply: 'Welcome to <strong>Brand Vision Media</strong>. We are Hyderabad and South India\'s premier outdoor media partner, commanding flagship inventory across <strong>Rajiv Gandhi International Airport (RGIA)</strong> and the <strong>Financial District / Kokapet</strong> corridors.<br><br>How can I assist your campaign planning today?',
+      reply: 'Welcome to <strong>Brand Vision Media</strong>. We manage prime outdoor billboard and airport media across Hyderabad and South India, including sites at <strong>Rajiv Gandhi International Airport (RGIA)</strong> and the <strong>Financial District / Kokapet</strong> corridors.<br><br>How can we assist your campaign planning today?',
       chips: [
         { label: 'RGIA Airport Screens', prompt: 'RGIA Airport Screens' },
         { label: 'The Trilight Kokapet Specs', prompt: 'The Trilight Kokapet Specs' },
@@ -1268,7 +1268,7 @@ function initAIChatSupport() {
         'rate', 'rates', 'price', 'pricing', 'cost', 'costs', 'budget', 'quote', 'how much',
         'rate card', 'charges', 'discount', 'packages', 'deal'
       ],
-      reply: '<strong>Transparent Media Network Pricing</strong>:<br>Brand Vision provides streamlined access to premier airport and arterial outdoor media across Hyderabad, Bangalore, and South India with transparent, competitive rates.<ul><li><strong>Tenures:</strong> 15-day campaign sprints, 30-day standard flights, quarterly (90-day), and annual partnerships.</li><li><strong>Formal Proposal SLA:</strong> Submit your brand and corridor to receive a complete PDF rate card with GPS coordinates and technical specs within <strong>2 hours</strong>.</li></ul>',
+      reply: '<strong>Transparent Media Network Pricing</strong>:<br>Brand Vision provides direct access to prime airport and arterial outdoor media across Hyderabad, Bangalore, and South India with transparent, competitive rates.<ul><li><strong>Tenures:</strong> 15-day campaign sprints, 30-day standard flights, quarterly (90-day), and annual partnerships.</li><li><strong>Formal Proposal:</strong> Submit your brand and corridor to receive a complete proposal with site availability, GPS coordinates, and technical specs within <strong>2 hours</strong>.</li></ul>',
       chips: [
         { label: 'Request Custom Rate Card', href: '#contact' },
         { label: 'Chat on WhatsApp', href: 'https://wa.me/919885335559' },
@@ -1281,7 +1281,7 @@ function initAIChatSupport() {
         'book', 'booking', 'process', 'procedure', 'how to book', 'steps', 'timeline', 'reserve',
         'launch', 'lead time'
       ],
-      reply: '<strong>Campaign Booking & Execution Workflow</strong>:<ol><li><strong>Inquiry:</strong> Specify your target site (RGIA, Kokapet, Financial District) and campaign dates.</li><li><strong>Formal Proposal (2-Hour SLA):</strong> Our desk shares exact availability, technical dimensions, and rate card.</li><li><strong>Creative Submission:</strong> Provide 4K digital MP4/JPG or high-res 300 DPI flex artwork.</li><li><strong>Mounting & Calibration:</strong> Digital displays go live within 24 hours; physical flex hoardings are mounted, illuminated, and structural-certified in 48-72 hours.</li><li><strong>Audit & Proof:</strong> Daily timestamped geotagged photos provided to your marketing team.</li></ol>',
+      reply: '<strong>Campaign Booking & Execution Workflow</strong>:<ol><li><strong>Inquiry:</strong> Specify your target site (RGIA, Kokapet, Financial District) and campaign dates.</li><li><strong>Proposal & Availability (Within 2 Hours):</strong> Our desk shares exact availability, technical dimensions, and rate card.</li><li><strong>Creative Submission:</strong> Provide 4K digital MP4/JPG or high-res 300 DPI flex artwork.</li><li><strong>Mounting & Calibration:</strong> Digital displays go live within 24 hours; physical flex hoardings are mounted, illuminated, and structural-certified in 48-72 hours.</li><li><strong>Audit & Proof:</strong> Daily timestamped geotagged photos provided to your marketing team.</li></ol>',
       chips: [
         { label: 'Start Campaign Inquiry', href: '#contact' },
         { label: 'Test Creative on Visualizer', href: '#preview' },
@@ -1307,7 +1307,7 @@ function initAIChatSupport() {
         'contact', 'call', 'phone', 'number', 'whatsapp', 'talk', 'human', 'director', 'agent',
         'person', 'speak', 'email', 'office', 'reach'
       ],
-      reply: '<strong>Connect Directly With Our Managing Partner</strong>:<ul><li><strong>K. Sreedhar (Direct):</strong> +91 98853 35559</li><li><strong>WhatsApp Desk:</strong> Instant response for availability &amp; rate sheets</li><li><strong>Email:</strong> brandvisionhyd@gmail.com</li><li><strong>Corporate Registered Office:</strong> Flat No. 105, Aneesh Towers, Padmarao Nagar, Secunderabad - 500 025, Telangana</li><li><strong>Proposal SLA:</strong> Guaranteed formal quotation within 2 hours</li></ul>',
+      reply: '<strong>Connect Directly With Our Managing Partner</strong>:<ul><li><strong>K. Sreedhar (Direct):</strong> +91 98853 35559</li><li><strong>WhatsApp Desk:</strong> Instant response for availability &amp; rate sheets</li><li><strong>Email:</strong> brandvisionhyd@gmail.com</li><li><strong>Corporate Registered Office:</strong> Flat No. 105, Aneesh Towers, Padmarao Nagar, Secunderabad - 500 025, Telangana</li><li><strong>Response Time:</strong> Quotation and site specs provided within 2 business hours</li></ul>',
       chips: [
         { label: 'Chat on WhatsApp', href: 'https://wa.me/919885335559' },
         { label: 'Call +91 98853 35559', href: 'tel:+919885335559' },
@@ -1333,7 +1333,7 @@ function initAIChatSupport() {
         'why', 'difference', 'advantage', 'broker', 'middleman', 'guarantee', 'proof', 'audit',
         'experience', 'trust'
       ],
-      reply: '<strong>The Brand Vision Media Advantage</strong>:<ul><li><strong>Prime Corridors & Exclusive Access:</strong> Curated high-impact sites across RGIA Shamshabad, Kokapet Golden Mile, and Cyberabad IT corridors.</li><li><strong>Zero-Failure Illumination:</strong> 100% lit every single night with dusk-to-dawn calibrated commercial illumination.</li><li><strong>Verified GPS Audits:</strong> Comprehensive date, time, and GPS-tagged photo audit proof delivered within 24 hours of live flight.</li><li><strong>2-Hour Proposal SLA:</strong> Rapid turnaround with dedicated managing partners handling your campaign directly.</li></ul>',
+      reply: '<strong>The Brand Vision Media Advantage</strong>:<ul><li><strong>Prime Corridors & Exclusive Access:</strong> Curated high-impact sites across RGIA Shamshabad, Kokapet Golden Mile, and Cyberabad IT corridors.</li><li><strong>Zero-Failure Illumination:</strong> 100% lit every single night with dusk-to-dawn calibrated commercial illumination.</li><li><strong>Verified GPS Audits:</strong> Comprehensive date, time, and GPS-tagged photo audit proof delivered within 24 hours of live flight.</li><li><strong>Fast 2-Hour Response Time:</strong> Rapid turnaround with our managing partner handling your campaign directly.</li></ul>',
       chips: [
         { label: 'Check Rate Card', href: '#contact' },
         { label: 'Browse Locations', href: '#locations' },
