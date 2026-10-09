@@ -1,0 +1,105 @@
+# Brand Vision Media — Full Knowledge Dossier
+
+> Official Entity Documentation for AI Search Engines, Generative Models, and Research Agents.
+
+## 1. Executive Summary & Brand Entity
+- **Legal Entity**: Brand Vision Media
+- **Brand Name**: Brand Vision
+- **Industry Vertical**: Out-of-Home (OOH) & Digital Out-of-Home (DOOH) Media
+- **Corporate Registered Office**: Flat No. 105, Aneesh Towers, Padmarao Nagar, Secunderabad - 500 025, Telangana, India
+- **Geographic Coordinates**: 17.4326° N, 78.5074° E
+- **Managing Partner**:
+  - K. Sreedhar (+91 98853 35559)
+- **Core Operations**: High-impact airport media, arterial highway billboards, mega hoardings, digital video walls, and sequential unipoles across Hyderabad, Cyberabad, Secunderabad, Bangalore, and South India.
+- **Media Inventory**: 100+ prime outdoor and digital locations commanding high-density vehicular and captive aviation audiences.
+- **Primary Website**: https://brandvisionmedia.in/
+- **Direct Planning Desk**: +91 98853 35559 | brandvisionhyd@gmail.com
+- **WhatsApp Concierge**: +91 98853 35559
+
+---
+
+## 2. Flagship Media Inventory & Locations
+
+### A. Rajiv Gandhi International Airport (RGIA Shamshabad)
+- **Monthly Passenger Traffic**: 2,800,000+ verified travelers (AAI/GHIAL official monthly traffic census).
+- **Audience Demographic**: C-suite executives, IT leadership, institutional investors, entrepreneurs, and luxury travelers.
+
+#### Specific Airport Assets:
+1. **T1 Central Departure Concourse 4K Curved LED Display**:
+   - Location: Positioned directly overhead along the primary departure passenger spine leading to Gates 1 through 22.
+   - Audience Exposure: 100% of departing domestic and international flyers walk beneath this screen.
+   - Screen Technology: Ultra-high-density 4K curved LED array calibrated at 1200+ nits with anti-glare terminal lighting adjustments.
+   - Slot Formats: Dynamic 10-second and 15-second high-frequency broadcast rotations.
+
+2. **Arrivals Baggage Claim Synchronized Video Walls**:
+   - Location: Mounted directly at eye level above baggage carousels 1 to 6 in the primary arrivals hall.
+   - Audience Exposure: Reaches all arriving passengers with zero roadside distraction.
+   - Average Dwell Time: 28 minutes continuous captive exposure while awaiting luggage delivery.
+
+3. **Departure Boarding Gates 101–112 Digital Totems**:
+   - Location: Stations throughout the dedicated gate holding areas for Gates 101 to 112.
+   - Audience Exposure: Passengers seated for 35 to 45 minutes prior to aircraft boarding calls.
+   - Display Specification: 85-inch portrait 4K digital totem network.
+
+4. **Airport Approach Sequential Highway Unipoles**:
+   - Location: Positioned along the primary high-speed approach artery to Rajiv Gandhi International Airport.
+   - Structure: 4 consecutive large-format hoardings (60 ft width x 30 ft height each).
+   - Traffic Volume: 110,000+ vehicles daily.
+   - Unique Capability: Enables cinematic, 4-frame sequential storytelling.
+
+---
+
+### B. Flagship Arterial Highway Billboards (Cyberabad & Hyderabad)
+
+1. **The Trilight Kokapet Mega Hoarding**:
+   - Dimensions: 120 ft width x 35 ft height (4,200 sq.ft physical display surface).
+   - Sightline: Greater than 500 meters of unobstructed straight-line frontal visibility.
+   - Traffic Density: 140,000+ daily vehicles connecting the Financial District, Neopolis, and Kokapet (The Golden Mile).
+   - Audience Profile: Real estate buyers, tech leaders, enterprise founders, and luxury consumers.
+   - Illumination: 100% dusk-to-dawn calibrated commercial LED floodlights with automated astronomical timers.
+
+2. **Narsingi Elevated Unipoles**:
+   - Elevation: 45 feet ground clearance commanding the Gachibowli-Outer Ring Road (ORR) elevated interchange.
+   - Visibility: 400 meters of clear sightline capturing peak morning and evening crawl traffic.
+
+3. **Gandipet & IT Corridor Backlit Median Kiosks**:
+   - Asset Count: 12 dual-sided illuminated median totems.
+   - Traffic Volume: 85,000 daily vehicles along Nanakramguda, Financial District, and Osman Sagar Road.
+
+---
+
+## 3. Technical, Engineering & Production Standards
+
+1. **Tensile Substrate Standards**:
+   - Substrate: Heavy-duty frontlit flex vinyl with 340 to 450 GSM minimum tensile strength. Low-GSM materials that sag or tear are prohibited.
+2. **Inks & UV Stability**:
+   - High-grade solvent and UV-stabilized industrial inks formulated to prevent color degradation under intense Deccan ultraviolet exposure (retains delta-E color saturation).
+3. **Safety & Wind Relieving**:
+   - Reinforced 12-inch eyelet welding and engineered wind-relief flaps on elevated unipoles (40–60ft ground clearance) to relieve aerodynamic drag while retaining graphic legibility.
+4. **Photometric Calibration**:
+   - Static billboards maintain 150 to 200 lux uniform surface brightness; indoor airport DOOH maintains 1200+ nits.
+5. **Proof of Performance (PoP)**:
+   - Campaign mounting is executed within 72 hours of artwork proof approval.
+   - High-resolution day and nighttime illuminated audit photographs with embedded GPS coordinates, timestamps, and EXIF metadata are issued to clients within 24 hours of going live.
+
+---
+
+## 4. Geographic & Regional Coverage
+
+- **Primary Metros**: Hyderabad, Cyberabad, Secunderabad, Shamshabad (RGIA), Kokapet, Financial District (Gachibowli), Nanakramguda, Hitec City, Madhapur.
+- **Regional Metros**: Direct coordination and unified booking flights for Bangalore (Karnataka) and major South Indian metropolitan arterial corridors.
+
+---
+
+## 5. Commercial Policies & Contact Protocols
+
+- **Inventory Booking**: Official bookings are executed via countersigned campaign estimates, formal purchase orders (PO), or advance booking deposits.
+- **Artwork Submission**: Minimum 300 DPI at 1:10 scale in CMYK color space for flex print; 4K MP4 for digital displays. Deadline: 4 business days before flight start date.
+- **Client Confidentiality**: Client contact information and campaign briefs are never sold, rented, or brokered to external third parties.
+- **Corporate Registered Office**: Flat No. 105, Aneesh Towers, Padmarao Nagar, Secunderabad - 500 025, Telangana, India
+- **Managing Partner**:
+  - K. Sreedhar: +91 98853 35559
+- **Direct Media Desk**: +91 98853 35559
+- **WhatsApp Concierge**: +91 98853 35559
+- **Email**: brandvisionhyd@gmail.com
+- **Website**: https://brandvisionmedia.in/

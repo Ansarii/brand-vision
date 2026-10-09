@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Temp & scratch directories
+scratch/
+chrome_user_data/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test artifacts
+board_region.jpg
+test_*.jpg
+test_*.png

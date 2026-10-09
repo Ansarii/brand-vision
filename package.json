@@ -1,0 +1,24 @@
+{
+  "name": "brand-vision-media",
+  "version": "2026.10.6",
+  "description": "Brand Vision Media — Premier Airport & Outdoor Advertising Network in Hyderabad",
+  "private": true,
+  "scripts": {
+    "audit": "python3 scripts/devops_audit.py",
+    "test": "npm run audit",
+    "lint:css": "python3 -c \"with open('assets/css/style.css') as f: t=f.read(); assert t.count('{') == t.count('}'), 'CSS brace mismatch'; print('CSS syntax OK')\"",
+    "lint:js": "node -c assets/js/main.js",
+    "lint": "npm run lint:css && npm run lint:js",
+    "dev": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "ooh",
+    "outdoor-advertising",
+    "airport-advertising",
+    "hyderabad",
+    "billboard-network",
+    "rgia"
+  ],
+  "author": "Brand Vision Media",
+  "license": "UNLICENSED"
+}

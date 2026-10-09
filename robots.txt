@@ -1,0 +1,57 @@
+# ==============================================================================
+# Brand Vision Media — Robots Directive (2026)
+# https://brandvisionmedia.in/
+# ==============================================================================
+
+User-agent: *
+Allow: /
+Disallow:
+
+# Standard Search Engines (Google, Yahoo, Bing, DuckDuckGo)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /assets/images/
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+# Generative AI, Search & Large Language Model Crawlers
+# (ChatGPT, Claude, Perplexity, Microsoft Copilot, Apple Intelligence, Gemini)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Sitemaps & LLM Context File
+Sitemap: https://brandvisionmedia.in/sitemap.xml
