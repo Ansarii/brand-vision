@@ -32,21 +32,41 @@ function initScrollExperience() {
   const needsJsProgress = !CSS.supports('animation-timeline: scroll()');
 
   let ticking = false;
+  let cachedMax = 0;
+  const updateMax = () => {
+    cachedMax = document.documentElement.scrollHeight - window.innerHeight;
+  };
+  window.addEventListener('resize', updateMax, { passive: true });
+  updateMax();
+
   const onScroll = () => {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
       const y = window.scrollY;
       header && header.classList.toggle('is-scrolled', y > 40);
-      if (needsJsProgress) {
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        bar.style.setProperty('--progress', max > 0 ? (y / max).toFixed(4) : 0);
+      if (needsJsProgress && cachedMax > 0) {
+        bar.style.setProperty('--progress', (y / cachedMax).toFixed(4));
       }
       ticking = false;
     });
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // Performance: Pause infinite marquees when not in viewport
+  const clientsSection = document.getElementById('clients') || document.querySelector('.trust-showcase-section');
+  if (clientsSection && 'IntersectionObserver' in window) {
+    const marqueeObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const tracks = clientsSection.querySelectorAll('.trust-marquee-track');
+        tracks.forEach(track => {
+          track.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+        });
+      });
+    }, { threshold: 0.05 });
+    marqueeObserver.observe(clientsSection);
+  }
 
   // Mark elements to reveal; stagger siblings in the same group
   const groups = [
@@ -127,19 +147,12 @@ function initCoralHeroSlider() {
 
   let current = 0;
   let autoplayTimer = null;
-  let textRevealTimer = null;
   const slideCount = slides.length;
 
   function showSlide(index) {
-    if (textRevealTimer) {
-      clearTimeout(textRevealTimer);
-      textRevealTimer = null;
-    }
-
     current = (index + slideCount) % slideCount;
 
     slides.forEach((slide, i) => {
-      slide.classList.remove('content-revealed');
       const isActive = (i === current);
       slide.classList.toggle('active', isActive);
       const slideVid = slide.querySelector('video');
@@ -160,14 +173,6 @@ function initCoralHeroSlider() {
     pageNums.forEach((btn, i) => {
       btn.classList.toggle('active', i === current);
     });
-
-    // First show full image cleanly for 2.4s, then reveal heading, sub-heading, and button sequentially
-    const activeSlide = slides[current];
-    if (activeSlide) {
-      textRevealTimer = setTimeout(() => {
-        activeSlide.classList.add('content-revealed');
-      }, 2400);
-    }
   }
 
   function startAutoplay() {
@@ -1783,10 +1788,10 @@ function initDocViewer() {
 }
 
 /* --------------------------------------------------------------------------
-   13. Direct Autoplay Video Engine (Silent, Loop, No Buttons)
+   13. High-Performance Video Engine (Single Active Video, Silent, Loop)
    -------------------------------------------------------------------------- */
 function initAutoplayVideos() {
-  const videos = document.querySelectorAll('video');
+  const videos = document.querySelectorAll('video:not(#modal-video)');
   if (!videos.length) return;
 
   videos.forEach(vid => {
@@ -1796,59 +1801,55 @@ function initAutoplayVideos() {
     vid.setAttribute('playsinline', '');
     vid.setAttribute('webkit-playsinline', '');
     vid.removeAttribute('controls');
+    vid.preload = 'none';
   });
 
-  const tryPlay = (vid) => {
+  let activeVid = null;
+
+  const playSingle = (vid) => {
+    if (activeVid && activeVid !== vid) {
+      activeVid.pause();
+    }
+    activeVid = vid;
     vid.muted = true;
-    const promise = vid.play();
-    if (promise !== undefined) {
-      promise.catch(() => {
-        // Autoplay policy fallback: resume silently on first interaction
-        const resumeOnInteract = () => {
-          vid.muted = true;
-          vid.play().catch(() => {});
-          ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
-            window.removeEventListener(evt, resumeOnInteract);
-          });
-        };
-        ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
-          window.addEventListener(evt, resumeOnInteract, { passive: true, once: true });
-        });
-      });
+    const p = vid.play();
+    if (p !== undefined) {
+      p.catch(() => {});
     }
   };
 
-  // IntersectionObserver performance optimizer: pause offscreen videos to save mobile battery & CPU
+  const pauseVid = (vid) => {
+    vid.pause();
+    if (activeVid === vid) {
+      activeVid = null;
+    }
+  };
+
+  // IntersectionObserver performance optimizer: at most one visible video plays
   if ('IntersectionObserver' in window) {
     const videoObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const vid = entry.target;
-        if (vid.id === 'modal-video') return;
-
         const slideParent = vid.closest('.coral-slide');
-        if (entry.isIntersecting) {
-          if (slideParent) {
-            if (slideParent.classList.contains('active')) {
-              tryPlay(vid);
-            }
+        if (slideParent) {
+          if (entry.isIntersecting && slideParent.classList.contains('active')) {
+            playSingle(vid);
           } else {
-            tryPlay(vid);
+            pauseVid(vid);
           }
+          return;
+        }
+
+        // For inline cards/showcases, only play when substantially in view (> 35%)
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+          playSingle(vid);
         } else {
-          vid.pause();
+          pauseVid(vid);
         }
       });
-    }, { threshold: 0.1, rootMargin: '120px 0px' });
+    }, { threshold: [0, 0.35] });
 
-    videos.forEach(vid => {
-      if (vid.id !== 'modal-video') {
-        videoObserver.observe(vid);
-      }
-    });
-  } else {
-    videos.forEach(v => {
-      if (v.id !== 'modal-video') tryPlay(v);
-    });
+    videos.forEach(vid => videoObserver.observe(vid));
   }
 }
 
