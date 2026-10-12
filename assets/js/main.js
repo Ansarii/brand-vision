@@ -1158,13 +1158,8 @@ function initAIChatSupport() {
         'hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening',
         'namaste', 'start', 'help', 'who are you', 'what is this'
       ],
-      reply: 'Welcome to <strong>Brand Vision Media</strong>. We manage prime outdoor billboard and airport media across Hyderabad and South India, including sites at <strong>Rajiv Gandhi International Airport (RGIA)</strong> and the <strong>Financial District / Kokapet</strong> corridors.<br><br>How can we assist your campaign planning today?',
-      chips: [
-        { label: 'RGIA Airport Screens', prompt: 'RGIA Airport Screens' },
-        { label: 'The Trilight Kokapet Specs', prompt: 'The Trilight Kokapet Specs' },
-        { label: 'Current Rate Cards', prompt: 'Current Rate Cards' },
-        { label: 'Try Billboard Visualizer', href: '#preview' }
-      ]
+      reply: 'Welcome to <strong>Brand Vision Media</strong>. We manage prime outdoor billboard and airport media across Hyderabad and South India, including sites at <strong>Rajiv Gandhi International Airport (RGIA)</strong> and the <strong>Financial District / Kokapet</strong> corridors.<br><br>How can our media planning desk assist your campaign today?',
+      chips: []
     },
     {
       id: 'airport_overview',
@@ -1174,9 +1169,7 @@ function initAIChatSupport() {
       ],
       reply: 'Brand Vision operates four exclusive digital and high-impact physical assets inside and approaching <strong>RGIA Shamshabad (2.8M+ monthly flyers)</strong>:<ul><li><strong>T1 Concourse 4K Curved LED:</strong> Overhead walkway to Gates 1-22 reaching 100% of departing passengers.</li><li><strong>Arrivals Baggage Video Walls:</strong> Eye-level displays at carousels 1-6 with an average 28-minute dwell time.</li><li><strong>Boarding Gates 101-112 Totems:</strong> 85-inch portrait 4K screens capturing high-net-worth flyers with 35-45 min captive wait.</li><li><strong>Sequential Highway Unipoles:</strong> 4 in-a-row hoardings along the airport approach road (110K daily vehicles).</li></ul>',
       chips: [
-        { label: 'Concourse LED Details', prompt: 'Tell me about Concourse Curved LED' },
-        { label: 'Baggage Video Walls', prompt: 'Tell me about baggage claim screens' },
-        { label: 'Gate Totems 101-112', prompt: 'Tell me about gate totems' },
+        { label: 'View Airport Media', href: '#locations' },
         { label: 'Airport Rate Proposal', href: '#contact' }
       ]
     },
@@ -1357,13 +1350,10 @@ function initAIChatSupport() {
 
   // Fallback response for unmapped queries
   const FALLBACK_REPLY = {
-    reply: 'I specialize in Brand Vision Media\'s outdoor advertising network across Hyderabad, Bangalore, and prime South India corridors. I can assist you with exact site dimensions, RGIA Airport digital screens, The Trilight Kokapet mega hoarding, current rate cards, or connecting directly with our Media Director.',
+    reply: 'Our planning desk can assist you with exact site dimensions, RGIA Airport digital screens, The Trilight Kokapet hoarding, current rate cards, or connecting directly with our Media Director Sri Kalapareddygari Sreedhar at <a href="tel:+919885335559" style="color: #ff8533; text-decoration: underline;">+91 98853 35559</a>.',
     chips: [
-      { label: 'RGIA Airport Screens', prompt: 'RGIA Airport Screens' },
-      { label: 'The Trilight Kokapet Specs', prompt: 'The Trilight Kokapet Specs' },
-      { label: 'Current Rate Cards', prompt: 'Current Rate Cards' },
-      { label: 'How to Book', prompt: 'How to Book a Hoarding' },
-      { label: 'Talk to Media Director', prompt: 'Talk to Media Director' }
+      { label: 'View Portfolio', href: '#locations' },
+      { label: 'Chat on WhatsApp', href: 'https://wa.me/919885335559' }
     ]
   };
 
@@ -1394,7 +1384,7 @@ function initAIChatSupport() {
         if (chatHistory.length > 0) {
           renderSavedHistory();
         } else {
-          renderBotResponse(BV_KNOWLEDGE[0].reply, BV_KNOWLEDGE[0].chips, false);
+          renderBotResponse(BV_KNOWLEDGE[0].reply, [], false);
         }
       }
       setTimeout(() => chatInput && chatInput.focus(), 150);
@@ -1424,7 +1414,7 @@ function initAIChatSupport() {
         sessionStorage.removeItem(STORAGE_KEY);
       } catch (e) {}
       messagesEl.innerHTML = '';
-      renderBotResponse('Conversation cleared. How can I help with your Hyderabad campaign planning today?', BV_KNOWLEDGE[0].chips, false);
+      renderBotResponse('Conversation cleared. How can our media planning desk assist with your Hyderabad outdoor campaign today?', [], false);
     });
   }
 
@@ -1531,7 +1521,7 @@ function initAIChatSupport() {
 
     const sender = document.createElement('div');
     sender.className = 'bv-msg-sender-label';
-    sender.textContent = 'Brand Vision AI';
+    sender.textContent = 'Media Planning Desk';
 
     const bubble = document.createElement('div');
     bubble.className = 'bv-msg-bubble';
