@@ -941,6 +941,49 @@ function initLightbox() {
     });
   });
 
+  const liveExpandBtns = document.querySelectorAll('.live-video-expand-btn');
+  liveExpandBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.live-video-card');
+      if (!card) return;
+      const vidEl = card.querySelector('video');
+      const vidSource = vidEl ? vidEl.querySelector('source') : null;
+      const vidSrc = vidSource ? vidSource.getAttribute('src') : (vidEl ? vidEl.getAttribute('src') : '');
+      const titleEl = card.querySelector('.live-video-title');
+      const locEl = card.querySelector('.live-spec-chip');
+      const tagEl = card.querySelector('.live-video-format-tag');
+      const chips = Array.from(card.querySelectorAll('.live-spec-chip')).map(c => c.textContent.trim());
+
+      const title = titleEl ? titleEl.textContent : 'On-Site Video Footage';
+      const loc = locEl ? locEl.textContent : 'Hyderabad Prime Corridors';
+      const tag = tagEl ? tagEl.textContent : 'Digital Video';
+
+      if (vidEl && vidSrc && modalVideo) {
+        if (modalImg) modalImg.style.display = 'none';
+        modalVideo.style.display = 'block';
+        modalVideo.src = vidSrc;
+        modalVideo.muted = true;
+        modalVideo.currentTime = 0;
+        const playPromise = modalVideo.play();
+        if (playPromise !== undefined) playPromise.catch(() => {});
+      }
+
+      if (modalTitle) modalTitle.textContent = title;
+      if (modalLoc) modalLoc.textContent = loc;
+      if (modalFormat) modalFormat.textContent = tag;
+
+      if (modalSpecsList) {
+        modalSpecsList.innerHTML = chips.map(chip =>
+          `<li><span class="spec-key">Key Metric</span><span class="spec-val">${escapeHtml(chip)}</span></li>`
+        ).join('');
+      }
+
+      if (overlay) overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
   if (closeBtn && overlay) {
     closeBtn.addEventListener('click', closeModal);
     overlay.addEventListener('click', e => {
@@ -1778,68 +1821,122 @@ function initDocViewer() {
 }
 
 /* --------------------------------------------------------------------------
-   13. High-Performance Video Engine (Single Active Video, Silent, Loop)
+   13. Resilient On-Site & DOOH Video Engine (Silent Autoplay, Toggle, Loop)
    -------------------------------------------------------------------------- */
 function initAutoplayVideos() {
-  const videos = document.querySelectorAll('video:not(#modal-video)');
-  if (!videos.length) return;
+  const allVideos = document.querySelectorAll('video:not(#modal-video)');
+  if (!allVideos.length) return;
 
-  videos.forEach(vid => {
-    // Enforce pure silent background playback without controls
+  allVideos.forEach(vid => {
     vid.muted = true;
     vid.defaultMuted = true;
     vid.setAttribute('playsinline', '');
     vid.setAttribute('webkit-playsinline', '');
     vid.removeAttribute('controls');
-    vid.preload = 'none';
+    if (!vid.preload || vid.preload === 'none') {
+      vid.preload = 'metadata';
+    }
   });
 
-  let activeVid = null;
+  // Setup interactive controls on live video cards
+  const liveCards = document.querySelectorAll('.live-video-card');
+  liveCards.forEach(card => {
+    const vid = card.querySelector('video');
+    const wrap = card.querySelector('.live-video-media-wrap');
+    const playBtn = card.querySelector('.live-video-play-btn');
+    if (!vid || !wrap) return;
 
-  const playSingle = (vid) => {
-    if (activeVid && activeVid !== vid) {
-      activeVid.pause();
-    }
-    activeVid = vid;
-    vid.muted = true;
-    const p = vid.play();
-    if (p !== undefined) {
-      p.catch(() => {});
-    }
-  };
+    let userPaused = false;
 
-  const pauseVid = (vid) => {
-    vid.pause();
-    if (activeVid === vid) {
-      activeVid = null;
-    }
-  };
-
-  // IntersectionObserver performance optimizer: at most one visible video plays
-  if ('IntersectionObserver' in window) {
-    const videoObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const vid = entry.target;
-        const slideParent = vid.closest('.coral-slide');
-        if (slideParent) {
-          if (entry.isIntersecting && slideParent.classList.contains('active')) {
-            playSingle(vid);
-          } else {
-            pauseVid(vid);
-          }
-          return;
+    const setPlaying = (playing) => {
+      card.classList.toggle('is-playing', playing);
+      card.classList.toggle('is-paused', !playing);
+      if (playBtn) {
+        playBtn.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
+        const playText = playBtn.querySelector('.live-play-text');
+        if (playText) {
+          playText.textContent = playing ? 'Click to Pause' : 'Click to Play';
         }
+      }
+    };
 
-        // For inline cards/showcases, only play when substantially in view (> 35%)
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
-          playSingle(vid);
-        } else {
-          pauseVid(vid);
+    vid.addEventListener('play', () => setPlaying(true));
+    vid.addEventListener('pause', () => setPlaying(false));
+
+    const togglePlayback = (e) => {
+      if (e) {
+        if (e.target.closest('.live-video-expand-btn')) return;
+        e.stopPropagation();
+      }
+      if (vid.paused) {
+        userPaused = false;
+        vid.muted = true;
+        const p = vid.play();
+        if (p !== undefined) p.catch(() => {});
+      } else {
+        userPaused = true;
+        vid.pause();
+      }
+    };
+
+    wrap.addEventListener('click', togglePlayback);
+    if (playBtn) {
+      playBtn.addEventListener('click', togglePlayback);
+    }
+
+    card._bvVideo = {
+      vid,
+      isUserPaused: () => userPaused,
+      playAuto: () => {
+        if (!userPaused && vid.paused) {
+          vid.muted = true;
+          const p = vid.play();
+          if (p !== undefined) p.catch(() => {});
+        }
+      },
+      pauseAuto: () => {
+        if (!vid.paused) {
+          vid.pause();
+        }
+      }
+    };
+  });
+
+  // IntersectionObserver: start playback when cards enter viewport, pause when off-screen
+  if ('IntersectionObserver' in window) {
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const card = entry.target;
+        if (card._bvVideo) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.2) {
+            card._bvVideo.playAuto();
+          } else {
+            card._bvVideo.pauseAuto();
+          }
         }
       });
-    }, { threshold: [0, 0.35] });
+    }, { threshold: [0, 0.2] });
 
-    videos.forEach(vid => videoObserver.observe(vid));
+    liveCards.forEach(card => cardObserver.observe(card));
+
+    // Also observe any catalog video cards (e.g. Candeur DOOH card)
+    const catalogCardsWithVideo = document.querySelectorAll('.catalog-card video');
+    if (catalogCardsWithVideo.length) {
+      const catalogVideoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const vid = entry.target;
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+            vid.muted = true;
+            const p = vid.play();
+            if (p !== undefined) p.catch(() => {});
+          } else {
+            vid.pause();
+          }
+        });
+      }, { threshold: [0, 0.25] });
+
+      catalogCardsWithVideo.forEach(vid => catalogVideoObserver.observe(vid));
+    }
   }
 }
 
