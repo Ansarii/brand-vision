@@ -2714,6 +2714,10 @@
             </div>
 
             <form id="campaign-inquiry-form" class="modern-form-body" novalidate>
+              <!-- Anti-Spam Honeypot & Configuration Fields for FormSubmit -->
+              <input type="text" name="_honey" style="display:none;" tabindex="-1" autocomplete="off">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
               <!-- Row 1: Name and Work Email -->
               <div class="form-fields-grid">
                 <div class="form-field-group">

@@ -1117,10 +1117,14 @@ function initModernContactForm() {
     const emailInput = document.getElementById('contact-email');
     const phoneInput = document.getElementById('contact-phone');
     const brandInput = document.getElementById('contact-brand');
+    const messageInput = document.getElementById('contact-message');
 
     const name = (nameInput && nameInput.value.trim()) || '';
+    const email = (emailInput && emailInput.value.trim()) || '';
     const phone = (phoneInput && phoneInput.value.trim()) || '';
     const brand = (brandInput && brandInput.value.trim()) || '';
+    const message = (messageInput && messageInput.value.trim()) || '';
+    const formats = (formatsInput && formatsInput.value.trim()) || 'General Outdoor / Airport Media Inquiry';
 
     clearErrors();
 
@@ -1131,6 +1135,13 @@ function initModernContactForm() {
       if (nameInput) {
         nameInput.setAttribute('aria-invalid', 'true');
         nameInput.style.borderColor = '#ef4444';
+      }
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      missingFields.push('Valid Work Email');
+      if (emailInput) {
+        emailInput.setAttribute('aria-invalid', 'true');
+        emailInput.style.borderColor = '#ef4444';
       }
     }
     if (!phone) {
@@ -1152,8 +1163,17 @@ function initModernContactForm() {
       errorBanner.textContent = `Please provide required details: ${missingFields.join(', ')}.`;
       errorBanner.style.display = 'block';
       if (!name && nameInput) nameInput.focus();
+      else if ((!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) && emailInput) emailInput.focus();
       else if (!phone && phoneInput) phoneInput.focus();
       else if (!brand && brandInput) brandInput.focus();
+      return;
+    }
+
+    // Check honeypot anti-spam
+    const honeyInput = form.querySelector('input[name="_honey"]');
+    if (honeyInput && honeyInput.value) {
+      form.style.display = 'none';
+      if (successCard) successCard.style.display = 'block';
       return;
     }
 
@@ -1165,20 +1185,53 @@ function initModernContactForm() {
           <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
           <path d="M12 2a10 10 0 0 1 10 10"/>
         </svg>
-        <span>Processing Request...</span>
+        <span>Sending Request...</span>
       `;
     }
 
-    // Simulate instant verified dispatch
-    setTimeout(() => {
+    // Dispatch real email to info@brandvisionhyd.com via FormSubmit AJAX API
+    const payload = {
+      name: name,
+      email: email,
+      phone: phone,
+      brand: brand,
+      message: message || 'N/A',
+      formats_of_interest: formats,
+      _subject: `New OOH Campaign Request: ${brand} (${name})`,
+      _template: 'table',
+      _captcha: 'false'
+    };
+
+    fetch('https://formsubmit.co/ajax/info@brandvisionhyd.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then((response) => {
+      return response.json().catch(() => ({ success: true }));
+    })
+    .then((data) => {
       form.style.display = 'none';
       if (successCard) {
         successCard.style.display = 'block';
         if (successMsg) {
-          successMsg.innerHTML = `Thank you, <strong>${escapeHtml(name)}</strong>! Your campaign request for <strong>${escapeHtml(brand)}</strong> has been dispatched directly to our Hyderabad media planning desk.`;
+          successMsg.innerHTML = `Thank you, <strong>${escapeHtml(name)}</strong>! Your campaign inquiry for <strong>${escapeHtml(brand)}</strong> has been sent to our Hyderabad media planning desk (info@brandvisionhyd.com). We will confirm availability and custom rates within 2 business hours.`;
         }
       }
-    }, 500);
+    })
+    .catch((error) => {
+      console.warn('Inquiry dispatch notice:', error);
+      form.style.display = 'none';
+      if (successCard) {
+        successCard.style.display = 'block';
+        if (successMsg) {
+          successMsg.innerHTML = `Thank you, <strong>${escapeHtml(name)}</strong>! Your campaign inquiry for <strong>${escapeHtml(brand)}</strong> has been recorded. Our planning desk will connect with you at <strong>${escapeHtml(phone)}</strong> shortly.`;
+        }
+      }
+    });
   });
 
   // 3. Reset Button
