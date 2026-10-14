@@ -810,6 +810,10 @@ html, body {
   grid-column: span 4;
 }
 
+.catalog-card.card-span-half {
+  grid-column: span 6;
+}
+
 .catalog-card.card-span-2 {
   grid-column: span 8;
 }
@@ -1996,6 +2000,7 @@ html, body {
   .journey-grid { grid-template-columns: repeat(2, 1fr); }
   .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .catalog-card.card-span-1,
+  .catalog-card.card-span-half,
   .catalog-card.card-span-2,
   .portfolio-editorial-card {
     grid-column: span 1;
@@ -2030,6 +2035,7 @@ html, body {
   .journey-grid { grid-template-columns: 1fr; }
   .catalog-grid { grid-template-columns: 1fr; gap: 18px; }
   .catalog-card.card-span-1,
+  .catalog-card.card-span-half,
   .catalog-card.card-span-2,
   .catalog-card.card-span-full,
   .portfolio-editorial-card {
@@ -2446,8 +2452,10 @@ body { background: #ffffff; color: var(--text-body); }
 .catalog-card[data-category="airport"] .catalog-tag-format { background: rgba(37, 99, 235, 0.9); }
 .catalog-card[data-category="highway"] .catalog-tag-format { background: rgba(217, 119, 6, 0.92); }
 .catalog-card[data-category="tech"] .catalog-tag-format { background: rgba(8, 145, 178, 0.92); }
+.catalog-card[data-category="transit"] .catalog-tag-format { background: rgba(16, 185, 129, 0.92); }
 .catalog-card[data-category="barricade"] .catalog-tag-format { background: rgba(124, 58, 237, 0.92); }
 .catalog-card[data-category="experiential"] .catalog-tag-format { background: rgba(219, 39, 119, 0.92); }
+.catalog-card[data-category="kiosks"] .catalog-tag-format { background: rgba(220, 38, 38, 0.92); }
 .catalog-tag-spec { color: #4338ca; }
 .catalog-spec-val { color: #1e1b4b; }
 

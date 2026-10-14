@@ -865,6 +865,12 @@ function initLightbox() {
       ['Visibility', 'All-angle, destination-style landmark'],
       ['Audience', 'Visitors, photo-sharing footfall, social reach'],
       ['Creative Rule', 'Custom fabrication, approvals handled by Brand Vision']
+    ],
+    kiosks: [
+      ['Display Type', 'Cyberabad Traffic Police 4-Sided Overhead Kiosk & Umbrella'],
+      ['Visibility', '360-Degree Four-Way Major Intersection Eyeline'],
+      ['Audience', 'Dense Vehicular Traffic Stoppage, Pedestrians & Commuters'],
+      ['Creative Rule', 'Four-sided synchronized panels, municipal police traffic clearance']
     ]
   };
 
