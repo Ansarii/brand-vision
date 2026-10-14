@@ -498,9 +498,6 @@ html, body {
   border-radius: var(--radius-xl);
   overflow: hidden;
   isolation: isolate;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border-light);
   transition: transform var(--transition);
@@ -518,9 +515,6 @@ html, body {
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   overflow: hidden;
   isolation: isolate;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 .hero-img-wrap img {
@@ -528,9 +522,6 @@ html, body {
   height: 100%;
   object-fit: cover;
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 .hero-badge-float {
@@ -582,9 +573,6 @@ html, body {
   border-radius: var(--radius-lg);
   overflow: hidden;
   isolation: isolate;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
@@ -627,9 +615,6 @@ html, body {
   width: 100%;
   aspect-ratio: 4/3;
   object-fit: cover;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 .journey-body {
@@ -793,9 +778,6 @@ html, body {
   border-radius: 20px;
   overflow: hidden;
   isolation: isolate;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   box-shadow: 0 10px 30px rgba(15, 6, 32, 0.12);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
   display: flex;
@@ -804,6 +786,10 @@ html, body {
   cursor: pointer;
   min-height: 440px;
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.catalog-card {
+  contain: layout paint;
 }
 
 .catalog-card.card-span-1 {
@@ -837,9 +823,6 @@ html, body {
   border-radius: inherit;
   overflow: hidden;
   isolation: isolate;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   background: #0f0620;
   z-index: 1;
 }
@@ -851,16 +834,12 @@ html, body {
   object-fit: cover;
   display: block;
   border-radius: inherit;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  will-change: transform;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .catalog-card:hover .catalog-img-wrap img,
 .catalog-card:hover .catalog-img-wrap video {
-  transform: scale(1.04) translate3d(0, 0, 0);
+  transform: scale(1.04);
 }
 
 /* Cinematic Scrim Vignette */
@@ -2448,7 +2427,6 @@ body { background: #ffffff; color: var(--text-body); }
 .catalog-tab.active { background: var(--grad-brand); color: #ffffff; border-color: transparent; box-shadow: 0 8px 20px -6px rgba(88, 44, 131, 0.55); }
 .catalog-card { border: none; box-shadow: 0 10px 30px -14px rgba(22, 7, 45, 0.25); }
 .catalog-card:hover { box-shadow: 0 26px 46px -16px rgba(88, 44, 131, 0.35); }
-.catalog-tag-format { backdrop-filter: blur(6px); }
 .catalog-card[data-category="airport"] .catalog-tag-format { background: rgba(37, 99, 235, 0.9); }
 .catalog-card[data-category="highway"] .catalog-tag-format { background: rgba(217, 119, 6, 0.92); }
 .catalog-card[data-category="tech"] .catalog-tag-format { background: rgba(8, 145, 178, 0.92); }
@@ -3512,9 +3490,6 @@ section[id] { scroll-margin-top: 90px; }
   height: 100%;
   background-size: cover;
   background-position: center top;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   z-index: 1;
 }
 
@@ -3582,7 +3557,6 @@ section[id] { scroll-margin-top: 90px; }
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
 }
 
 .coral-slide-heading {
@@ -3597,7 +3571,6 @@ section[id] { scroll-margin-top: 90px; }
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
 }
 
 .coral-slide-desc {
@@ -3610,14 +3583,12 @@ section[id] { scroll-margin-top: 90px; }
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
 }
 
 .coral-slide-action {
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
 }
 
 /* Smooth, immediate reveal on active slide */
@@ -6065,9 +6036,6 @@ a.coral-drawer-contact-val:hover {
   border-radius: var(--radius-xl);
   overflow: hidden;
   isolation: isolate;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   box-shadow: 0 10px 30px -5px rgba(88, 44, 131, 0.1), 0 2px 8px -2px rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(88, 44, 131, 0.12);
   display: flex;
@@ -6089,9 +6057,6 @@ a.coral-drawer-contact-val:hover {
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   overflow: hidden;
   isolation: isolate;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   cursor: pointer;
 }
 
@@ -6103,9 +6068,6 @@ a.coral-drawer-contact-val:hover {
   pointer-events: none;
   background: #000000;
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 .live-video-expand-btn {

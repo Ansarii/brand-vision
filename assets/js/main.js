@@ -211,9 +211,32 @@ function initCoralHeroSlider() {
     });
   });
 
+  let heroInView = true;
+
   if (slider) {
     slider.addEventListener('mouseenter', stopAutoplay);
-    slider.addEventListener('mouseleave', startAutoplay);
+    slider.addEventListener('mouseleave', () => { if (heroInView) startAutoplay(); });
+
+    // Performance: freeze the slider and its video while the hero is scrolled out of view
+    if ('IntersectionObserver' in window) {
+      const heroObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          heroInView = entry.isIntersecting;
+          const activeVid = slides[current] ? slides[current].querySelector('video') : null;
+          if (heroInView) {
+            if (activeVid && activeVid.paused) {
+              const p = activeVid.play();
+              if (p !== undefined) p.catch(() => {});
+            }
+            startAutoplay();
+          } else {
+            stopAutoplay();
+            if (activeVid) activeVid.pause();
+          }
+        });
+      }, { threshold: 0 });
+      heroObserver.observe(slider);
+    }
 
     // Touch support
     let startX = 0;
