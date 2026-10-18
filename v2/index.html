@@ -50,6 +50,9 @@
   <link rel="stylesheet" href="css/modern.css?v=40">
   <meta name="theme-color" content="#ffffff">
   <script>
+    if (window.location.pathname.indexOf('/v2') !== -1) {
+      window.location.replace('/' + window.location.search + window.location.hash);
+    }
     document.documentElement.classList.add("js");
     (function() {
       var h = window.location.hash || '';

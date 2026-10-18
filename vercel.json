@@ -2,8 +2,18 @@
   "cleanUrls": true,
   "redirects": [
     {
-      "source": "/",
-      "destination": "/v2/",
+      "source": "/v2",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/v2/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/v2/(.*)",
+      "destination": "/$1",
       "permanent": false
     }
   ]
