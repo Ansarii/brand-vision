@@ -6,6 +6,7 @@
 # Temp & scratch directories
 scratch/
 chrome_user_data/
+.claude/
 
 # Python
 __pycache__/

@@ -118,8 +118,12 @@ function initScrollExperience() {
       const target = parseFloat(match[1]);
       const suffix = match[2];
       const decimals = (match[1].split('.')[1] || '').length;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        node.textContent = target.toFixed(decimals) + suffix;
+        return;
+      }
       const start = performance.now();
-      const duration = 1600;
+      const duration = 600;
       const step = now => {
         const t = Math.min((now - start) / duration, 1);
         const eased = 1 - Math.pow(1 - t, 3);
@@ -128,7 +132,7 @@ function initScrollExperience() {
       };
       requestAnimationFrame(step);
     });
-  }, { threshold: 0.6 });
+  }, { threshold: 0.2 });
 
   document.querySelectorAll('.coral-stat-val, .stat-value').forEach(el => counterObserver.observe(el));
 }
@@ -273,22 +277,49 @@ function initCoralNav() {
   const drawerLinks = document.querySelectorAll('.coral-drawer-link, #drawer-logo-link');
   const navLinks = document.querySelectorAll('.coral-nav-link');
 
+  let isToggling = false;
+  function lockToggle() {
+    isToggling = true;
+    setTimeout(() => { isToggling = false; }, 300);
+  }
+
   function openDrawer() {
+    if (isToggling) return;
     if (drawer) {
       drawer.classList.add('active');
       drawer.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
-      if (toggle) toggle.setAttribute('aria-expanded', 'true');
     }
+    if (toggle) toggle.setAttribute('aria-expanded', 'true');
+    lockToggle();
   }
 
   function closeDrawer() {
+    if (isToggling) return;
     if (drawer) {
       drawer.classList.remove('active');
       drawer.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-      if (toggle) toggle.setAttribute('aria-expanded', 'false');
     }
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    lockToggle();
+  }
+
+  window.__bvCloseDrawer = closeDrawer;
+  window.__bvOpenDrawer = openDrawer;
+
+  // MutationObserver safeguard: guarantee toggle aria-expanded matches drawer active class at all times
+  if (drawer && 'MutationObserver' in window) {
+    const drawerObserver = new MutationObserver(() => {
+      const isActive = drawer.classList.contains('active');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      }
+      if (!isActive) {
+        document.body.style.overflow = '';
+      }
+    });
+    drawerObserver.observe(drawer, { attributes: true, attributeFilter: ['class'] });
   }
 
   if (toggle) {
@@ -313,11 +344,14 @@ function initCoralNav() {
     backdrop.addEventListener('click', closeDrawer);
   }
 
-  drawerLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      closeDrawer();
+  // Any link, button, or action inside the drawer must close the drawer cleanly
+  if (drawer) {
+    drawer.querySelectorAll('a, button:not(#coral-drawer-close)').forEach(el => {
+      el.addEventListener('click', () => {
+        closeDrawer();
+      });
     });
-  });
+  }
 
   // Close on Escape key
   document.addEventListener('keydown', (e) => {
@@ -428,7 +462,7 @@ const locationData = {
     desc: 'Hyderabad’s gateway to the world. Our screens dominate the main passenger corridors, shopping areas, boarding gates (Gates 101-112), and luggage belts where travelers spend 25 to 45 minutes.',
     traffic: '2.8M+ Passengers / Month',
     dwell: '35 - 45 Minutes',
-    photo: 'assets/images/airport-concourse-sumadhura.jpg'
+    photo: 'img/airport-concourse-sumadhura.webp'
   },
   kokapet: {
     title: 'The Golden Mile - Kokapet & Financial District',
@@ -436,7 +470,7 @@ const locationData = {
     desc: 'The fastest-growing luxury corridor in South India. Our curved arterial billboards (The Trilight, The Line) give your brand unmissable visibility in front of senior executives, tech leaders, and premium homebuyers.',
     traffic: '140,000+ Vehicles / Day',
     dwell: '500m Clear Sightline',
-    photo: 'assets/images/highway-curved-kokapet-panoramic.jpg'
+    photo: 'img/highway-curved-kokapet-panoramic.webp'
   },
   gandipet: {
     title: 'Osman Sagar Road - Gandipet IT Corridor',
@@ -444,7 +478,7 @@ const locationData = {
     desc: 'Connects the Financial District to Gandipet’s luxury villas and top colleges. Our repetitive dual-sided lit kiosks ensure drivers see your message several times on their daily commute.',
     traffic: '85,000+ Vehicles / Day',
     dwell: 'Repetitive Commute',
-    photo: 'assets/images/median-kiosks-actfibernet.jpg'
+    photo: 'img/median-kiosks-actfibernet.webp'
   },
   approach: {
     title: 'Airport Approach & Toll Gateway Curve',
@@ -452,7 +486,7 @@ const locationData = {
     desc: 'Four synchronized structures placed right after each other along the airport highway curve. Arriving and departing passengers experience a full story unfolding across multiple billboards.',
     traffic: '110,000+ Vehicles / Day',
     dwell: 'Synchronized Storytelling',
-    photo: 'assets/images/highway-sequential-atlantis.jpg'
+    photo: 'img/highway-sequential-atlantis.webp'
   }
 };
 
@@ -509,22 +543,22 @@ function initAdVisualizer() {
   // aligned no matter what resolution the photograph is exported at (fixes the 4K mismatch).
   const billboardSpots = {
     airport: {
-      src: 'assets/images/airport-concourse-sumadhura.jpg',
+      src: 'img/airport-concourse-sumadhura.webp',
       poly: [[0.188, 0.147], [0.826, 0.151], [0.826, 0.421], [0.188, 0.418]],
       surface: 'led'
     },
     highway: {
-      src: 'assets/images/trilight-kokapet-mercedes.jpg',
+      src: 'img/trilight-kokapet-mercedes.webp',
       poly: [[0.24125, 0.19486], [0.63938, 0.19486], [0.63938, 0.44384], [0.24125, 0.44384]],
       surface: 'flood'
     },
     totem: {
-      src: 'assets/images/airport-gate-jackdaniels.jpg',
+      src: 'img/airport-gate-jackdaniels.webp',
       poly: [[0.39, 0.2089], [0.6425, 0.2089], [0.6425, 0.7911], [0.39, 0.7911]],
       surface: 'led'
     },
     unipole: {
-      src: 'assets/images/highway-sequential-atlantis.jpg',
+      src: 'img/highway-sequential-atlantis.webp',
       poly: [[0.1242, 0.1433], [0.2820, 0.1433], [0.2820, 0.4694], [0.1242, 0.4694]],
       surface: 'flood'
     }
@@ -1028,23 +1062,163 @@ function initLightbox() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Smooth Anchor Scroll
+   7. Smooth Anchor Scroll & URL Hash State Synchronization
    -------------------------------------------------------------------------- */
 function initSmoothScroll() {
+  const header = document.querySelector('.coral-site-header, .site-header');
+
+  function getScrollTargetY(target) {
+    const headerH = header ? header.offsetHeight : 78;
+    const isMobile = window.innerWidth <= 820;
+    const padding = isMobile ? 48 : 20;
+    const targetY = target.getBoundingClientRect().top + window.scrollY - headerH - padding;
+    return Math.max(0, targetY);
+  }
+
+  function scrollToSection(target, smooth = true) {
+    const targetY = getScrollTargetY(target);
+    window.scrollTo({
+      top: targetY,
+      behavior: smooth ? 'smooth' : 'auto'
+    });
+  }
+
+  let scrollTimer = null;
+  function setProgrammaticScroll(targetHash) {
+    window.__bvProgrammaticScroll = true;
+    if (targetHash) {
+      try { sessionStorage.setItem('bv_active_hash', targetHash); } catch (e) {}
+      if (history.pushState) history.pushState(null, '', targetHash);
+      else window.location.hash = targetHash;
+    }
+    clearTimeout(scrollTimer);
+    const onEnd = () => {
+      window.__bvProgrammaticScroll = false;
+      window.removeEventListener('scrollend', onEnd);
+      clearTimeout(scrollTimer);
+    };
+    if ('onscrollend' in window) {
+      window.addEventListener('scrollend', onEnd, { once: true });
+    }
+    scrollTimer = setTimeout(() => {
+      window.__bvProgrammaticScroll = false;
+    }, 1200);
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
+      let href = this.getAttribute('href');
       if (href === '#' || !href) return;
+      if (this.hasAttribute('data-doc-target')) return;
+
+      // Clean Home / Top navigation: smoothly scroll to top and keep URL clean (no /#top)
+      if (href === '#top' || href === '#home') {
+        e.preventDefault();
+        try { sessionStorage.removeItem('bv_active_hash'); } catch (err) {}
+        if (history.pushState) history.pushState(null, '', window.location.pathname + window.location.search);
+        window.__bvProgrammaticScroll = true;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => { window.__bvProgrammaticScroll = false; }, 1200);
+        return;
+      }
+
+      // Backward-compatibility alias: rewrite #inventory to #portfolio
+      if (href === '#inventory') {
+        href = '#portfolio';
+      }
+
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+        setProgrammaticScroll(href);
+        scrollToSection(target, true);
       }
     });
   });
+
+  // Handle initial page load or browser refresh with hash in URL or sessionStorage
+  function handleInitialResume() {
+    let hash = window.location.hash;
+
+    // Clean up unwanted /#top or /#home on initial load
+    if (hash === '#top' || hash === '#home') {
+      if (history.replaceState) history.replaceState(null, '', window.location.pathname + window.location.search);
+      hash = '';
+    }
+
+    // Backward-compatibility alias: if someone visits with /#inventory, redirect hash to /#portfolio
+    if (hash === '#inventory') {
+      if (history.replaceState) history.replaceState(null, '', '#portfolio');
+      hash = '#portfolio';
+    }
+
+    if (!hash || hash === '#') {
+      try {
+        const saved = sessionStorage.getItem('bv_active_hash');
+        if (saved && saved !== '#top' && saved !== '#home') {
+          hash = saved === '#inventory' ? '#portfolio' : saved;
+        }
+      } catch (err) {}
+    }
+
+    const revealBody = () => {
+      document.documentElement.classList.remove('bv-resuming');
+    };
+
+    if (!hash || hash === '#' || hash === '#top' || hash === '#home') {
+      revealBody();
+      return;
+    }
+    if (['#blogs', '#terms', '#privacy', '#sources'].includes(hash.toLowerCase())) {
+      revealBody();
+      return;
+    }
+
+    const target = document.querySelector(hash);
+    if (target) {
+      // Instant positioning (auto) while paint shield is active
+      scrollToSection(target, false);
+      // Reveal body already positioned at target section
+      revealBody();
+
+      requestAnimationFrame(() => {
+        scrollToSection(target, false);
+      });
+      setTimeout(() => {
+        scrollToSection(target, false);
+      }, 100);
+    } else {
+      revealBody();
+    }
+  }
+
+  // Execute immediately upon DOM readiness, never wait for full window.load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handleInitialResume);
+  } else {
+    handleInitialResume();
+  }
+
+  const handleHashRouting = () => {
+    let hash = window.location.hash;
+    if (!hash || hash === '#' || hash === '#top' || hash === '#home') {
+      if (hash === '#top' || hash === '#home') {
+        if (history.replaceState) history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (hash === '#inventory') {
+      if (history.replaceState) history.replaceState(null, '', '#portfolio');
+      hash = '#portfolio';
+    }
+    const target = document.querySelector(hash);
+    if (target) scrollToSection(target, true);
+  };
+
+  window.addEventListener('popstate', handleHashRouting);
+  window.addEventListener('hashchange', handleHashRouting);
 }
 
 /* --------------------------------------------------------------------------
@@ -1263,6 +1437,7 @@ function initAIChatSupport() {
   const closeBtn = document.getElementById('bv-chat-close');
   const clearBtn = document.getElementById('bv-chat-clear');
   const messagesEl = document.getElementById('bv-chat-messages');
+  const emptyStateEl = document.getElementById('bv-chat-empty-state');
   const quickBar = document.getElementById('bv-chat-quick-bar');
   const chatForm = document.getElementById('bv-chat-form');
   const chatInput = document.getElementById('bv-chat-input');
@@ -1283,8 +1458,26 @@ function initAIChatSupport() {
         'hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening',
         'namaste', 'start', 'help', 'who are you', 'what is this'
       ],
-      reply: 'Welcome to <strong>Brand Vision Media</strong>. We manage prime outdoor billboard and airport media across Hyderabad and South India, including sites at <strong>Rajiv Gandhi International Airport (RGIA)</strong> and the <strong>Financial District / Kokapet</strong> corridors.<br><br>How can our media planning desk assist your campaign today?',
-      chips: []
+      reply: 'Hello! Welcome to <strong>Brand Vision Media</strong>. Are you looking for billboard availability across Hyderabad, commercial rate estimates, or execution timelines?<br><br>Tell me your preferred corridor, campaign duration, or brand name, and our planning desk will assist you directly.',
+      chips: [
+        { label: 'Check Site Availability', prompt: 'Check site availability by location' },
+        { label: 'Pricing & Estimates', prompt: 'How do billboard and airport rates work?' },
+        { label: 'Go-Live Timelines', prompt: 'How fast can our campaign go live?' }
+      ]
+    },
+    {
+      id: 'site_availability',
+      patterns: [
+        'availability', 'available', 'check availability', 'check site availability', 'locations',
+        'corridors', 'where', 'vacant', 'open sites', 'inventory', 'check site availability by location',
+        'location'
+      ],
+      reply: '<strong>Live Inventory & Site Availability</strong>:<br>Our media planning desk maintains active inventory across Hyderabad\'s highest-traffic commercial corridors:<ul><li><strong>IT &amp; Financial Corridors:</strong> Hitec City, Gachibowli, Financial District, and Nanakramguda.</li><li><strong>Arterial Expressways:</strong> Outer Ring Road (ORR), Jubilee Hills, and Banjara Hills.</li><li><strong>Transit &amp; Airport Routes:</strong> Airport approach highways, concourses, and terminal touchpoints.</li></ul>Share your target areas and campaign dates below to receive current availability and site options within <strong>2 hours</strong>.',
+      chips: [
+        { label: 'Browse Location Directory', href: '#locations' },
+        { label: 'Request Availability Check', href: '#contact' },
+        { label: 'WhatsApp Planning Desk', href: 'https://wa.me/919885335559' }
+      ]
     },
     {
       id: 'airport_overview',
@@ -1331,7 +1524,7 @@ function initAIChatSupport() {
       chips: [
         { label: 'View Gate Displays', href: '#locations' },
         { label: 'Request Proposal', href: '#contact' },
-        { label: 'Call Media Director', href: 'tel:+919885335559' }
+        { label: 'Call Managing Partner', href: 'tel:+919885335559' }
       ]
     },
     {
@@ -1384,7 +1577,8 @@ function initAIChatSupport() {
       id: 'rates_pricing',
       patterns: [
         'rate', 'rates', 'price', 'pricing', 'cost', 'costs', 'budget', 'quote', 'how much',
-        'rate card', 'charges', 'discount', 'packages', 'deal'
+        'rate card', 'charges', 'discount', 'packages', 'deal', 'how do billboard and airport rates work',
+        'pricing & custom proposal', 'rates & pricing'
       ],
       reply: '<strong>Transparent Media Network Pricing</strong>:<br>Brand Vision provides direct access to prime airport and arterial outdoor media across Hyderabad, Bangalore, and South India with transparent, competitive rates.<ul><li><strong>Tenures:</strong> 15-day campaign sprints, 30-day standard flights, quarterly (90-day), and annual partnerships.</li><li><strong>Formal Proposal:</strong> Submit your brand and corridor to receive a complete proposal with site availability, GPS coordinates, and technical specs within <strong>2 hours</strong>.</li></ul>',
       chips: [
@@ -1397,9 +1591,10 @@ function initAIChatSupport() {
       id: 'booking_process',
       patterns: [
         'book', 'booking', 'process', 'procedure', 'how to book', 'steps', 'timeline', 'reserve',
-        'launch', 'lead time'
+        'launch', 'lead time', 'how fast can our campaign go live', 'execution & timelines',
+        'execution', 'timelines', 'turnaround', 'go live'
       ],
-      reply: '<strong>Campaign Booking & Execution Workflow</strong>:<ol><li><strong>Inquiry:</strong> Specify your target site (RGIA, Kokapet, Financial District) and campaign dates.</li><li><strong>Proposal & Availability (Within 2 Hours):</strong> Our desk shares exact availability, technical dimensions, and rate card.</li><li><strong>Creative Submission:</strong> Provide 4K digital MP4/JPG or high-res 300 DPI flex artwork.</li><li><strong>Mounting & Calibration:</strong> Digital displays go live within 24 hours; physical flex hoardings are mounted, illuminated, and structural-certified in 48-72 hours.</li><li><strong>Audit & Proof:</strong> Daily timestamped geotagged photos provided to your marketing team.</li></ol>',
+      reply: '<span class="bv-msg-heading">Campaign Booking &amp; Execution Workflow</span><div class="bv-steps-list"><div class="bv-step-row"><div class="bv-step-badge">01</div><div class="bv-step-content"><strong>Inquiry:</strong> Specify your target corridor, preferred campaign dates, and brand requirements.</div></div><div class="bv-step-row"><div class="bv-step-badge">02</div><div class="bv-step-content"><strong>Proposal &amp; Availability:</strong> Our desk shares active inventory options, technical dimensions, and rate card within <strong>2 hours</strong>.</div></div><div class="bv-step-row"><div class="bv-step-badge">03</div><div class="bv-step-content"><strong>Creative Submission:</strong> Provide 4K digital MP4/JPG or high-res 300 DPI flex artwork for pre-flight check.</div></div><div class="bv-step-row"><div class="bv-step-badge">04</div><div class="bv-step-content"><strong>Mounting &amp; Calibration:</strong> Digital displays go live within 24 hours; physical flex hoardings are mounted, illuminated, and structural-certified in 48-72 hours.</div></div><div class="bv-step-row"><div class="bv-step-badge">05</div><div class="bv-step-content"><strong>Audit &amp; Proof:</strong> Daily timestamped, geotagged photos provided directly to your marketing team.</div></div></div>',
       chips: [
         { label: 'Start Campaign Inquiry', href: '#contact' },
         { label: 'Test Creative on Visualizer', href: '#preview' },
@@ -1423,7 +1618,9 @@ function initAIChatSupport() {
       id: 'contact_human',
       patterns: [
         'contact', 'call', 'phone', 'number', 'whatsapp', 'talk', 'human', 'director', 'agent',
-        'person', 'speak', 'email', 'office', 'reach'
+        'person', 'speak', 'email', 'office', 'reach', 'managing partner', 'partner', 'sreedhar',
+        'talk to managing partner', 'talk to media director', 'connect with managing partner sri k. sreedhar',
+        'connect with founder', 'connect with managing partner', 'founder'
       ],
       reply: '<strong>Connect Directly With Our Managing Partner</strong>:<ul><li><strong>K. Sreedhar (Direct):</strong> +91 98853 35559</li><li><strong>WhatsApp Desk:</strong> Instant response for availability &amp; rate sheets</li><li><strong>Email:</strong> info@brandvisionhyd.com</li><li><strong>Corporate Registered Office:</strong> Flat No. 105, Aneesh Towers, Padmarao Nagar, Secunderabad - 500 025, Telangana</li><li><strong>Response Time:</strong> Quotation and site specs provided within 2 business hours</li></ul>',
       chips: [
@@ -1451,7 +1648,7 @@ function initAIChatSupport() {
         'why', 'difference', 'advantage', 'broker', 'middleman', 'guarantee', 'proof', 'audit',
         'experience', 'trust'
       ],
-      reply: '<strong>The Brand Vision Media Advantage</strong>:<ul><li><strong>Prime Corridors & Exclusive Access:</strong> Curated high-impact sites across RGIA Shamshabad, Kokapet Golden Mile, and Cyberabad IT corridors.</li><li><strong>Zero-Failure Illumination:</strong> 100% lit every single night with dusk-to-dawn calibrated commercial illumination.</li><li><strong>Verified GPS Audits:</strong> Comprehensive date, time, and GPS-tagged photo audit proof delivered within 24 hours of live flight.</li><li><strong>Fast 2-Hour Response Time:</strong> Rapid turnaround with our managing partner handling your campaign directly.</li></ul>',
+      reply: '<span class="bv-msg-heading">The Brand Vision Media Advantage</span><ul><li><strong>Prime Corridors &amp; Direct Access:</strong> Curated high-impact arterial and transit media across prime South Indian business corridors.</li><li><strong>Zero-Failure Illumination:</strong> 100% lit every single night with dusk-to-dawn calibrated commercial illumination.</li><li><strong>Verified GPS Audits:</strong> Comprehensive date, time, and GPS-tagged photo audit proof delivered within 24 hours of live flight.</li><li><strong>Fast 2-Hour Turnaround:</strong> Direct coordination with our managing partner on site selection and proposals.</li></ul>',
       chips: [
         { label: 'Check Rate Card', href: '#contact' },
         { label: 'Browse Locations', href: '#locations' },
@@ -1464,18 +1661,18 @@ function initAIChatSupport() {
         'bangalore', 'bengaluru', 'karnataka', 'multi city', 'multicity', 'other cities', 'other locations',
         'pan india', 'south india', 'multiple cities', 'expansion'
       ],
-      reply: 'Brand Vision manages prime outdoor media campaigns across <strong>Hyderabad, Bangalore, and major South Indian business corridors</strong>. While Hyderabad and RGIA Airport represent our flagship core network, our planning desk coordinates seamless multi-city brand flights with verified prime inventory.',
+      reply: 'Brand Vision manages prime outdoor media campaigns across <strong>Hyderabad, Bangalore, and major South Indian business corridors</strong>. While Hyderabad represents our flagship core network, our planning desk coordinates direct multi-city brand campaigns with verified prime inventory.',
       chips: [
         { label: 'Multi-City Plan Inquiry', href: '#contact' },
         { label: 'Browse Flagship Sites', href: '#locations' },
-        { label: 'Talk to Media Director', prompt: 'Talk to Media Director' }
+        { label: 'Talk to Managing Partner', prompt: 'Talk to Managing Partner' }
       ]
     }
   ];
 
   // Fallback response for unmapped queries
   const FALLBACK_REPLY = {
-    reply: 'Our planning desk can assist you with exact site dimensions, RGIA Airport digital screens, The Trilight Kokapet hoarding, current rate cards, or connecting directly with our Media Director Sri Kalapareddygari Sreedhar at <a href="tel:+919885335559" style="color: #ff8533; text-decoration: underline;">+91 98853 35559</a>.',
+    reply: 'Our media planning desk can assist you with active site availability, technical production specifications, custom rate cards, or connecting directly with our Managing Partner Sri Kalapareddygari Sreedhar at <a href="tel:+919885335559" style="color: #ff8533; text-decoration: underline;">+91 98853 35559</a>.',
     chips: [
       { label: 'View Portfolio', href: '#locations' },
       { label: 'Chat on WhatsApp', href: 'https://wa.me/919885335559' }
@@ -1495,25 +1692,34 @@ function initAIChatSupport() {
     chatHistory = [];
   }
 
+  function hideEmptyState() {
+    if (emptyStateEl) emptyStateEl.style.display = 'none';
+  }
+
+  function showEmptyState() {
+    if (emptyStateEl) emptyStateEl.style.display = 'flex';
+  }
+
   // Toggle chat window open / close
   function setChatOpen(open) {
     if (open) {
+      document.body.classList.add('has-chat-open');
       if (chatContainer) chatContainer.classList.add('is-open');
       launcher.style.display = 'none';
       launcher.setAttribute('aria-expanded', 'true');
       chatWindow.style.display = 'flex';
       chatWindow.classList.add('is-open');
 
-      // If empty history, render welcome message
-      if (messagesEl.children.length === 0) {
-        if (chatHistory.length > 0) {
-          renderSavedHistory();
-        } else {
-          renderBotResponse(BV_KNOWLEDGE[0].reply, [], false);
-        }
+      // If empty history, show modern empty state; else render saved messages
+      if (chatHistory && chatHistory.length > 0) {
+        hideEmptyState();
+        renderSavedHistory();
+      } else {
+        showEmptyState();
       }
       setTimeout(() => chatInput && chatInput.focus(), 150);
     } else {
+      document.body.classList.remove('has-chat-open');
       if (chatContainer) chatContainer.classList.remove('is-open');
       chatWindow.classList.remove('is-open');
       chatWindow.style.display = 'none';
@@ -1538,8 +1744,9 @@ function initAIChatSupport() {
       try {
         sessionStorage.removeItem(STORAGE_KEY);
       } catch (e) {}
-      messagesEl.innerHTML = '';
-      renderBotResponse('Conversation cleared. How can our media planning desk assist with your Hyderabad outdoor campaign today?', [], false);
+      const rows = messagesEl.querySelectorAll('.bv-msg-row');
+      rows.forEach((r) => r.remove());
+      showEmptyState();
     });
   }
 
@@ -1558,7 +1765,7 @@ function initAIChatSupport() {
     }
   });
 
-  // Handle Quick Prompt Pills
+  // Handle Quick Prompt Pills (if present)
   if (quickBar) {
     quickBar.addEventListener('click', (e) => {
       const pill = e.target.closest('.bv-quick-pill');
@@ -1568,8 +1775,16 @@ function initAIChatSupport() {
     });
   }
 
-  // Handle Action Chip clicks inside messages
+  // Handle Starter Cards and Action Chip clicks inside messages
   messagesEl.addEventListener('click', (e) => {
+    const starter = e.target.closest('.bv-starter-card');
+    if (starter) {
+      e.preventDefault();
+      const prompt = starter.getAttribute('data-prompt') || starter.textContent.trim();
+      handleUserSubmit(prompt);
+      return;
+    }
+
     const chip = e.target.closest('.bv-msg-chip');
     if (!chip) return;
     const prompt = chip.getAttribute('data-prompt');
@@ -1600,6 +1815,7 @@ function initAIChatSupport() {
   }
 
   function handleUserSubmit(userText) {
+    hideEmptyState();
     // Render user message bubble
     renderUserMessage(userText);
     saveMessageToHistory('user', userText);
@@ -1688,7 +1904,11 @@ function initAIChatSupport() {
     row.appendChild(time);
 
     messagesEl.appendChild(row);
-    scrollMessagesToBottom();
+    if (row.offsetHeight > messagesEl.clientHeight * 0.6) {
+      row.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      scrollMessagesToBottom();
+    }
   }
 
   function showTypingIndicator() {
@@ -1844,10 +2064,17 @@ function initDocViewer() {
     modalOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
 
-    // If navigation drawer is open, close it
-    const drawerOverlay = document.getElementById('coral-drawer-overlay');
-    if (drawerOverlay && drawerOverlay.classList.contains('active')) {
-      drawerOverlay.classList.remove('active');
+    // If navigation drawer is open, close it cleanly
+    if (window.__bvCloseDrawer) {
+      window.__bvCloseDrawer();
+    } else {
+      const drawerOverlay = document.getElementById('coral-drawer-overlay');
+      if (drawerOverlay && drawerOverlay.classList.contains('active')) {
+        drawerOverlay.classList.remove('active');
+        drawerOverlay.setAttribute('aria-hidden', 'true');
+        const toggleBtn = document.getElementById('coral-menu-toggle');
+        if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+      }
     }
   }
 

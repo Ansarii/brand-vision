@@ -46,8 +46,31 @@
   <link rel="icon" type="image/svg+xml" href="assets/images/brand-vision-favicon.svg">
   <link rel="apple-touch-icon" href="assets/images/brand-vision-favicon.svg">
   <link rel="preload" as="image" href="assets/images/airport-concourse-sumadhura.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/style.css?v=2026.10.13.16">
-  <script>document.documentElement.classList.add("js");</script>
+  <link rel="stylesheet" href="assets/css/style.css?v=2026.10.18.02">
+  <script>
+    document.documentElement.classList.add("js");
+    (function() {
+      var h = window.location.hash || '';
+      if (h === '#top' || h === '#home') {
+        if (history.replaceState) history.replaceState(null, '', window.location.pathname + window.location.search);
+        h = '';
+      }
+      if (h === '#inventory') {
+        if (history.replaceState) history.replaceState(null, '', '#portfolio');
+        h = '#portfolio';
+      }
+      if (!h || h === '#') {
+        try {
+          var s = sessionStorage.getItem('bv_active_hash');
+          if (s && s !== '#top' && s !== '#home') h = (s === '#inventory' ? '#portfolio' : s);
+        } catch(e) {}
+      }
+      if (h && h !== '#' && h !== '#top' && h !== '#home' && !['#blogs', '#terms', '#privacy', '#sources'].includes(h.toLowerCase())) {
+        document.documentElement.classList.add('bv-resuming');
+        setTimeout(function() { document.documentElement.classList.remove('bv-resuming'); }, 800);
+      }
+    })();
+  </script>
 
   <!-- Structured Data Graph (JSON-LD) for Google, Yahoo, Bing, ChatGPT, Claude, Perplexity -->
   <script type="application/ld+json">
@@ -270,7 +293,7 @@
       <nav class="coral-nav" aria-label="Main Navigation">
         <ul class="coral-nav-menu" id="coral-nav-menu">
           <li><a href="#top" class="coral-nav-link active">Home</a></li>
-          <li><a href="#inventory" class="coral-nav-link">Portfolio</a></li>
+          <li><a href="#portfolio" class="coral-nav-link">Portfolio</a></li>
           <li><a href="#clients" class="coral-nav-link">Clients</a></li>
           <li><a href="#about" class="coral-nav-link">About Us</a></li>
           <li><a href="#contact" class="coral-nav-link">Contact Us</a></li>
@@ -311,7 +334,7 @@
           <span class="coral-drawer-label">Quick Navigation</span>
           <ul class="coral-drawer-links">
             <li><a href="#top" class="coral-drawer-link" data-num="01">Home</a></li>
-            <li><a href="#inventory" class="coral-drawer-link" data-num="02">Portfolio</a></li>
+            <li><a href="#portfolio" class="coral-drawer-link" data-num="02">Portfolio</a></li>
             <li><a href="#clients" class="coral-drawer-link" data-num="03">Clients &amp; Testimonials</a></li>
             <li><a href="#about" class="coral-drawer-link" data-num="04">About Brand Vision</a></li>
             <li><a href="#contact" class="coral-drawer-link" data-num="05">Contact Us</a></li>
@@ -350,7 +373,7 @@
             <div class="coral-drawer-policy-links">
               <button type="button" class="coral-drawer-policy-btn" data-doc-target="blogs">Blogs</button>
               <span class="coral-drawer-policy-sep" aria-hidden="true">•</span>
-              <button type="button" class="coral-drawer-policy-btn" data-doc-target="terms">Terms and conditions</button>
+              <button type="button" class="coral-drawer-policy-btn" data-doc-target="terms">Terms and Conditions</button>
               <span class="coral-drawer-policy-sep" aria-hidden="true">•</span>
               <button type="button" class="coral-drawer-policy-btn" data-doc-target="privacy">Privacy Policy</button>
               <span class="coral-drawer-policy-sep" aria-hidden="true">•</span>
@@ -381,7 +404,7 @@
               Reach over 2.8 million monthly air travelers and 140,000 daily highway commuters with direct-ownership outdoor advertising locations across Hyderabad.
             </p>
             <div class="coral-slide-action">
-              <a href="#inventory" class="coral-slide-btn">
+              <a href="#portfolio" class="coral-slide-btn">
                 <span>EXPLORE PORTFOLIO</span>
               </a>
             </div>
@@ -403,7 +426,7 @@
               Prominently positioned on the curved approach connecting the Financial District and Neopolis, offering an unobstructed 500-meter straight sightline to daily traffic.
             </p>
             <div class="coral-slide-action">
-              <a href="#inventory" class="coral-slide-btn">
+              <a href="#portfolio" class="coral-slide-btn">
                 <span>VIEW KOKAPET SPECS</span>
               </a>
             </div>
@@ -449,7 +472,7 @@
               Mounted directly above primary arrival and departure escalators, capturing focused attention as travelers move between gates and baggage reclaim.
             </p>
             <div class="coral-slide-action">
-              <a href="#inventory" class="coral-slide-btn">
+              <a href="#portfolio" class="coral-slide-btn">
                 <span>EXPLORE AIRPORT MEDIA</span>
               </a>
             </div>
@@ -510,7 +533,7 @@
   <!-- ==========================================================================
        Section 2: Hoardings & Screens Catalog (Media Portfolio)
        ========================================================================== -->
-  <section class="section section-bg-subtle" id="inventory">
+  <section class="section section-bg-subtle" id="portfolio">
     <div class="container">
       <div class="section-header">
         <span class="tagline">Media Portfolio</span>
@@ -2895,12 +2918,12 @@
         <div>
           <h4 class="footer-col-title">What We Offer</h4>
           <ul class="footer-links-list">
-            <li><a href="#inventory">Airport Concourse Screens</a></li>
-            <li><a href="#inventory">Baggage Carousel Video Walls</a></li>
-            <li><a href="#inventory">Boarding Gate Digital Totems</a></li>
-            <li><a href="#inventory">Highway & Flyover Unipoles</a></li>
-            <li><a href="#inventory">Roadside Median Kiosks</a></li>
-            <li><a href="#inventory">Construction Site Barricades</a></li>
+            <li><a href="#portfolio">Airport Concourse Screens</a></li>
+            <li><a href="#portfolio">Baggage Carousel Video Walls</a></li>
+            <li><a href="#portfolio">Boarding Gate Digital Totems</a></li>
+            <li><a href="#portfolio">Highway & Flyover Unipoles</a></li>
+            <li><a href="#portfolio">Roadside Median Kiosks</a></li>
+            <li><a href="#portfolio">Construction Site Barricades</a></li>
           </ul>
         </div>
 
@@ -2933,7 +2956,7 @@
         <nav class="footer-bottom-nav" aria-label="Corporate Documents and Policies">
           <button type="button" class="footer-bottom-nav-btn" data-doc-target="blogs">Blogs</button>
           <span class="footer-bottom-nav-sep" aria-hidden="true">•</span>
-          <button type="button" class="footer-bottom-nav-btn" data-doc-target="terms">Terms and conditions</button>
+          <button type="button" class="footer-bottom-nav-btn" data-doc-target="terms">Terms and Conditions</button>
           <span class="footer-bottom-nav-sep" aria-hidden="true">•</span>
           <button type="button" class="footer-bottom-nav-btn" data-doc-target="privacy">Privacy Policy</button>
           <span class="footer-bottom-nav-sep" aria-hidden="true">•</span>
@@ -2994,7 +3017,7 @@
         <h3 class="doc-modal-title" id="doc-modal-title">Industry Insights &amp; Operational Standards</h3>
         <div class="doc-modal-tabs" role="tablist" aria-label="Documentation Tabs">
           <button type="button" class="doc-tab-btn active" role="tab" aria-selected="true" data-tab-target="blogs" id="tab-btn-blogs">Blogs</button>
-          <button type="button" class="doc-tab-btn" role="tab" aria-selected="false" data-tab-target="terms" id="tab-btn-terms">Terms and conditions</button>
+          <button type="button" class="doc-tab-btn" role="tab" aria-selected="false" data-tab-target="terms" id="tab-btn-terms">Terms and Conditions</button>
           <button type="button" class="doc-tab-btn" role="tab" aria-selected="false" data-tab-target="privacy" id="tab-btn-privacy">Privacy Policy</button>
           <button type="button" class="doc-tab-btn" role="tab" aria-selected="false" data-tab-target="sources" id="tab-btn-sources">Sources</button>
         </div>
@@ -3236,35 +3259,83 @@
         </div>
       </div>
 
-      <!-- Messages Thread -->
+      <!-- Messages Thread & Empty State -->
       <div class="bv-chat-messages" id="bv-chat-messages" role="log" aria-live="polite">
-        <!-- Rendered by JS -->
-      </div>
+        <!-- Modern 2027 AI Concierge Empty State -->
+        <div class="bv-chat-empty-state" id="bv-chat-empty-state">
+          <div class="bv-empty-hero">
+            <div class="bv-empty-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M18 14v1a6 6 0 0 1-12 0v-1"/><line x1="12" y1="21" x2="12" y2="18"/><circle cx="12" cy="11" r="1"/></svg>
+            </div>
+            <h3 class="bv-empty-title">Hyderabad Media Planning Desk</h3>
+            <p class="bv-empty-subtitle">Direct site availability, commercial rate estimates, and campaign execution across Hyderabad and South India.</p>
+          </div>
 
-      <!-- Quick Prompt Pills Bar -->
-      <div class="bv-chat-quick-bar" id="bv-chat-quick-bar">
-        <button type="button" class="bv-quick-pill" data-prompt="RGIA Airport Screens">RGIA Airport Screens</button>
-        <button type="button" class="bv-quick-pill" data-prompt="The Trilight Kokapet Specs">The Trilight Kokapet</button>
-        <button type="button" class="bv-quick-pill" data-prompt="Current Rate Cards">Current Rate Cards</button>
-        <button type="button" class="bv-quick-pill" data-prompt="How to Book a Hoarding">How to Book</button>
-        <button type="button" class="bv-quick-pill" data-prompt="Talk to Media Director">Contact Media Director</button>
+          <div class="bv-empty-label">Campaign Inquiries</div>
+
+          <div class="bv-starter-grid">
+            <button type="button" class="bv-starter-card" data-prompt="Check site availability by location">
+              <div class="bv-starter-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+              </div>
+              <div class="bv-starter-content">
+                <span class="bv-starter-title">Check Site Availability</span>
+                <span class="bv-starter-hint">Inquire by corridor, area, or landmark</span>
+              </div>
+              <span class="bv-starter-arrow" aria-hidden="true">&rarr;</span>
+            </button>
+
+            <button type="button" class="bv-starter-card" data-prompt="How do billboard and airport rates work?">
+              <div class="bv-starter-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div class="bv-starter-content">
+                <span class="bv-starter-title">Pricing &amp; Custom Proposal</span>
+                <span class="bv-starter-hint">Ballpark rates, packages, and estimates</span>
+              </div>
+              <span class="bv-starter-arrow" aria-hidden="true">&rarr;</span>
+            </button>
+
+            <button type="button" class="bv-starter-card" data-prompt="How fast can our campaign go live?">
+              <div class="bv-starter-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div class="bv-starter-content">
+                <span class="bv-starter-title">Execution &amp; Timelines</span>
+                <span class="bv-starter-hint">Printing, mounting, permissions, and 48h turnaround</span>
+              </div>
+              <span class="bv-starter-arrow" aria-hidden="true">&rarr;</span>
+            </button>
+
+            <button type="button" class="bv-starter-card" data-prompt="Connect with Managing Partner Sri K. Sreedhar">
+              <div class="bv-starter-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+              </div>
+              <div class="bv-starter-content">
+                <span class="bv-starter-title">Connect with Managing Partner</span>
+                <span class="bv-starter-hint">Direct discussion with Sri K. Sreedhar</span>
+              </div>
+              <span class="bv-starter-arrow" aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- Chat Input Area -->
       <form class="bv-chat-input-area" id="bv-chat-form">
         <div class="bv-input-wrap">
-          <input type="text" id="bv-chat-input" class="bv-chat-input" placeholder="Ask about sites, rates, audience reach..." autocomplete="off" aria-label="Type your message">
+          <input type="text" id="bv-chat-input" class="bv-chat-input" placeholder="Ask about hoardings, airport LED, rates..." autocomplete="off" aria-label="Type your message">
           <button type="submit" class="bv-chat-send-btn" id="bv-chat-send" aria-label="Send message">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </button>
         </div>
         <div class="bv-chat-footnote">
-          <span>Senior Media Planning Desk • Hyderabad &amp; South India Inventory</span>
+          <span>Sole Contact: Sri Kalapareddygari Sreedhar &bull; +91 98853 35559</span>
         </div>
       </form>
     </div>
   </div>
 
-  <script src="assets/js/main.js?v=2026.10.13.16"></script>
+  <script src="assets/js/main.js?v=2026.10.18.02"></script>
 </body>
 </html>

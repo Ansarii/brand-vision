@@ -66,12 +66,16 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   font-size: 16px;
   background-color: var(--bg-main);
   color: var(--text-main);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+}
+
+html.bv-resuming body {
+  visibility: hidden !important;
 }
 
 html, body {
@@ -1824,6 +1828,68 @@ html, body {
   .footer-bottom-bar {
     padding-right: 0;
     margin-bottom: 50px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+    padding-top: 20px;
+  }
+  .footer-bottom-copy {
+    text-align: center;
+    width: 100%;
+    font-size: 0.82rem;
+    order: 2;
+  }
+  .footer-bottom-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 10px;
+    width: 100%;
+    order: 1;
+  }
+  .footer-bottom-nav-sep {
+    display: none;
+  }
+  .footer-bottom-nav-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #cbd5e1;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s ease;
+  }
+  .footer-bottom-nav-btn:hover,
+  .footer-bottom-nav-btn:active {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.28);
+    color: #ffffff;
+  }
+  .coral-drawer-policy-links {
+    justify-content: center;
+    gap: 8px 10px;
+  }
+  .coral-drawer-policy-sep {
+    display: none;
+  }
+  .coral-drawer-policy-btn {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    color: #475569;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -2315,6 +2381,7 @@ body { background: #ffffff; color: var(--text-body); }
     radial-gradient(600px 300px at 100% 0%, rgba(245, 158, 11, 0.14), transparent 70%),
     linear-gradient(180deg, #fffaf0 0%, #fff7ed 100%);
 }
+#portfolio,
 #inventory {
   background:
     radial-gradient(700px 320px at 50% 0%, rgba(124, 58, 237, 0.10), transparent 70%),
@@ -2497,18 +2564,6 @@ body { background: #ffffff; color: var(--text-body); }
 }
 
 section[id] { scroll-margin-top: 90px; }
-
-/* Performance: Defer layout and rendering for heavy off-screen sections */
-#catalog,
-#clients,
-#locations,
-#day-night,
-#calculator,
-#about,
-#contact {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
-}
 
 /* ==========================================================================
    LOGO - clean alignment, tagline always on one line
@@ -4392,35 +4447,45 @@ a.coral-drawer-contact-val:hover {
 }
 
 .coral-drawer-policy-links {
-  margin-top: 14px;
+  margin-top: 16px;
   padding-top: 14px;
   border-top: 1px solid #e2e8f0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 8px 10px;
 }
 
 .coral-drawer-policy-btn {
-  background: none;
-  border: none;
-  padding: 3px 5px;
-  font-size: 0.82rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: #64748b;
+  color: #475569;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: color 0.16s ease;
+  transition: all 0.18s ease;
   font-family: inherit;
+  text-decoration: none;
 }
 
-.coral-drawer-policy-btn:hover {
-  color: #ff6600;
+.coral-drawer-policy-btn:hover,
+.coral-drawer-policy-btn:focus-visible {
+  background: #582c83;
+  color: #ffffff;
+  border-color: #582c83;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(88, 44, 131, 0.2);
 }
 
 .coral-drawer-policy-sep {
-  font-size: 0.75rem;
-  color: #cbd5e1;
-  user-select: none;
+  display: none !important;
 }
 
 
@@ -5550,46 +5615,159 @@ a.coral-drawer-contact-val:hover {
   }
 }
 
-/* Quick Prompt Pills Bar */
+/* Quick Prompt Pills Bar - Retired in favor of 2027 Empty State Starters */
 .bv-chat-quick-bar {
-  padding: 8px 14px 10px;
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-  background: rgba(15, 23, 42, 0.7);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  flex-shrink: 0;
-}
-
-.bv-chat-quick-bar::-webkit-scrollbar {
   display: none;
 }
-.bv-chat-quick-bar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+/* ==========================================================================
+   Modern 2027 AI Concierge Empty State & Starter Architecture
+   ========================================================================== */
+.bv-chat-empty-state {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 4px 12px;
+  animation: bv-fade-in 0.3s ease-out;
 }
 
-.bv-quick-pill {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #cbd5e1;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 9999px;
+@keyframes bv-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bv-empty-hero {
+  text-align: center;
+  padding: 10px 10px 18px;
+}
+
+.bv-empty-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #582c83 0%, #ff6600 100%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 24px -4px rgba(255, 102, 0, 0.45);
+}
+
+.bv-empty-avatar svg {
+  width: 24px;
+  height: 24px;
+  stroke: #ffffff;
+}
+
+.bv-empty-title {
+  color: #f8fafc;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+
+.bv-empty-subtitle {
+  color: #94a3b8;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  margin: 0 auto;
+  max-width: 320px;
+}
+
+.bv-empty-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-bottom: 10px;
+  padding-left: 2px;
+}
+
+.bv-starter-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bv-starter-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  background: rgba(30, 41, 59, 0.65);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 14px;
+  color: #e2e8f0;
   cursor: pointer;
-  transition: all 0.18s ease;
-  white-space: nowrap;
+  text-align: left;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+}
+
+.bv-starter-card:hover {
+  background: rgba(88, 44, 131, 0.35);
+  border-color: rgba(255, 102, 0, 0.45);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px -4px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 102, 0, 0.2);
+}
+
+.bv-starter-card:active {
+  transform: translateY(0);
+}
+
+.bv-starter-card:hover .bv-starter-arrow {
+  transform: translateX(3px);
+  color: #ff6600;
+}
+
+.bv-starter-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(88, 44, 131, 0.28);
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff8533;
   flex-shrink: 0;
 }
 
-.bv-quick-pill:hover {
-  background: rgba(88, 44, 131, 0.45);
-  border-color: rgba(255, 102, 0, 0.5);
-  color: #ffffff;
-  transform: translateY(-1px);
+.bv-starter-icon svg {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+}
+
+.bv-starter-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.bv-starter-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f8fafc;
+  line-height: 1.25;
+}
+
+.bv-starter-hint {
+  font-size: 0.74rem;
+  color: #94a3b8;
+  line-height: 1.35;
+}
+
+.bv-starter-arrow {
+  color: #64748b;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 /* Chat Input Form */
@@ -6476,4 +6654,95 @@ a.coral-drawer-contact-val:hover {
   color: #1e1b4b;
   font-weight: 600;
   font-size: 0.82rem;
+}
+
+/* ==========================================================================
+   Chat Message Typography & Senior QC List Alignment
+   ========================================================================== */
+.bv-msg-bubble {
+  padding: 13px 16px !important;
+  line-height: 1.6 !important;
+}
+
+.bv-msg-heading {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.bv-msg-bubble ol,
+.bv-msg-bubble ul {
+  margin: 8px 0 6px 0 !important;
+  padding-left: 1.35rem !important;
+  list-style-position: outside !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.bv-msg-bubble ol li,
+.bv-msg-bubble ul li {
+  padding-left: 4px !important;
+  line-height: 1.55 !important;
+  color: #cbd5e1 !important;
+  margin-bottom: 0 !important;
+}
+
+.bv-msg-bubble ol li::marker {
+  color: #ff8533 !important;
+  font-weight: 700 !important;
+}
+
+.bv-msg-bubble ul li::marker {
+  color: #ff8533 !important;
+}
+
+/* Workflow Step Cards: 100% Precision Alignment & Zero Hanging Numbers */
+.bv-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px 0 4px;
+}
+
+.bv-step-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 10px;
+  padding: 9px 11px;
+}
+
+.bv-step-badge {
+  min-width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, rgba(88, 44, 131, 0.5) 0%, rgba(255, 102, 0, 0.4) 100%);
+  border: 1px solid rgba(255, 102, 0, 0.35);
+  color: #ff8533;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.bv-step-content {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+.bv-step-content strong {
+  color: #f8fafc;
+  font-weight: 600;
 }

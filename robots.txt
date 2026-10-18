@@ -14,6 +14,8 @@ Allow: /
 User-agent: Googlebot-Image
 Allow: /assets/images/
 Allow: /images/
+Allow: /v2/img/
+Allow: /v2/video/
 
 User-agent: Bingbot
 Allow: /
