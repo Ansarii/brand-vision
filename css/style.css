@@ -3204,15 +3204,15 @@ section[id] { scroll-margin-top: 90px; }
 
 /* Row-specific marquee speeds and directions */
 .trust-row-left .trust-marquee-track {
-  animation: trust-marquee-scroll-left 45s linear infinite;
+  animation: trust-marquee-scroll-left 135s linear infinite;
 }
 
 .trust-row-right .trust-marquee-track {
-  animation: trust-marquee-scroll-right 48s linear infinite;
+  animation: trust-marquee-scroll-right 145s linear infinite;
 }
 
 .trust-row-left-alt .trust-marquee-track {
-  animation: trust-marquee-scroll-left 40s linear infinite;
+  animation: trust-marquee-scroll-left 125s linear infinite;
 }
 
 .trust-marquee-track:hover {

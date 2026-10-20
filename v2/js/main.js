@@ -57,11 +57,11 @@ function initScrollExperience() {
   // Seamless loop guarantee: Ensure marquee tracks always have enough pills to fill ultra-wide viewports
   var ensureMarqueeWidth = function () {
     var tracks = document.querySelectorAll('.trust-marquee-track');
-    var minRequired = Math.max(window.innerWidth * 2.4, 11000);
+    var minRequired = Math.max(window.innerWidth * 2.05, 10000);
     tracks.forEach(function (track) {
       if (!track) return;
       var attempts = 0;
-      while (track.scrollWidth < minRequired && attempts < 4) {
+      while (track.scrollWidth < minRequired && attempts < 2) {
         attempts++;
         var children = [].slice.call(track.children);
         var frag = document.createDocumentFragment();
