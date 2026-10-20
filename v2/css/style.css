@@ -3215,7 +3215,7 @@ section[id] { scroll-margin-top: 90px; }
   animation: trust-marquee-scroll-left 40s linear infinite;
 }
 
-.trust-grid-marquee-container:hover .trust-marquee-track {
+.trust-marquee-track:hover {
   animation-play-state: paused;
 }
 

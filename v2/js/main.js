@@ -54,17 +54,40 @@ function initScrollExperience() {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  // Seamless loop guarantee: Ensure marquee tracks always have enough pills to fill ultra-wide viewports
+  var ensureMarqueeWidth = function () {
+    var tracks = document.querySelectorAll('.trust-marquee-track');
+    var minRequired = Math.max(window.innerWidth * 2.4, 11000);
+    tracks.forEach(function (track) {
+      if (!track) return;
+      var attempts = 0;
+      while (track.scrollWidth < minRequired && attempts < 4) {
+        attempts++;
+        var children = [].slice.call(track.children);
+        var frag = document.createDocumentFragment();
+        children.forEach(function (child) {
+          var clone = child.cloneNode(true);
+          clone.setAttribute('aria-hidden', 'true');
+          frag.appendChild(clone);
+        });
+        track.appendChild(frag);
+      }
+    });
+  };
+  ensureMarqueeWidth();
+  window.addEventListener('resize', ensureMarqueeWidth);
+
   // Performance: Pause infinite marquees when not in viewport
-  const clientsSection = document.getElementById('clients') || document.querySelector('.trust-showcase-section');
+  var clientsSection = document.getElementById('clients') || document.querySelector('.trust-showcase-section');
   if (clientsSection && 'IntersectionObserver' in window) {
-    const marqueeObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const tracks = clientsSection.querySelectorAll('.trust-marquee-track');
-        tracks.forEach(track => {
+    var marqueeObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var tracks = clientsSection.querySelectorAll('.trust-marquee-track');
+        tracks.forEach(function (track) {
           track.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
         });
       });
-    }, { threshold: 0.05 });
+    }, { rootMargin: '300px 0px', threshold: 0 });
     marqueeObserver.observe(clientsSection);
   }
 

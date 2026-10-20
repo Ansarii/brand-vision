@@ -888,3 +888,40 @@ img[loading="lazy"] { background: #ebe7f2; }
   color: #f8fafc;
   font-weight: 600;
 }
+
+/* ==========================================================================
+   Ultra-wide and Super-ultrawide Displays (21:9, 32:9 like Samsung Odyssey G9)
+   Prevents excessive 2.67x over-zoom, vertical crops, and blur on 32:9 viewports.
+   ========================================================================== */
+@media (min-aspect-ratio: 21/10) {
+  .mv-hero {
+    background: radial-gradient(ellipse at 50% 50%, rgba(30, 16, 50, 0.95) 0%, #0a0613 100%);
+  }
+  .mv-hero-media {
+    max-width: 3200px;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+  }
+  .mv-hero-poster,
+  .mv-hero-video,
+  .mv-hero-still {
+    object-position: center 30%;
+  }
+}
+
+@media (min-width: 2560px) {
+  .coral-header-container {
+    max-width: 2560px;
+    padding: 0 48px;
+  }
+  .mv-hero-inner {
+    max-width: 1600px;
+  }
+  .container {
+    max-width: 2200px;
+  }
+}
+

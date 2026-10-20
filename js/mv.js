@@ -15,7 +15,7 @@
     var conn = navigator.connection || {};
     var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches || conn.saveData || /2g/.test(conn.effectiveType || '');
     if (!calm) {
-      var slides = [video].concat(stills), idx = 0, timer = null;
+      var slides = [video].concat(stills), idx = 0, timer = null, initialized = false;
       var hideAll = function () { slides.forEach(function (el) { el.classList.remove('on'); }); };
       var next = function () { idx = (idx + 1) % slides.length; show(); };
       var show = function () {
@@ -24,7 +24,21 @@
         var el = slides[idx];
         if (el === video) {
           video.currentTime = 0;
-          video.play().then(function () { video.classList.add('on'); }).catch(function () { timer = setTimeout(next, 4000); });
+          video.classList.add('on');
+          var playPromise = video.play();
+          if (playPromise && typeof playPromise.then === 'function') {
+            playPromise.catch(function () {
+              // If browser blocked autoplay, wait for first interaction or advance smoothly
+              var unlock = function () {
+                video.play();
+                window.removeEventListener('pointerdown', unlock);
+                window.removeEventListener('scroll', unlock);
+              };
+              window.addEventListener('pointerdown', unlock, { once: true, passive: true });
+              window.addEventListener('scroll', unlock, { once: true, passive: true });
+              timer = setTimeout(next, 5000);
+            });
+          }
         } else {
           video.pause();
           el.classList.add('on');
@@ -32,14 +46,32 @@
         }
       };
       video.addEventListener('ended', next);
-      video.src = video.dataset.src;
-      video.load();
-      video.addEventListener('canplay', function first() {
-        video.removeEventListener('canplay', first);
-        // Load the photos only once the video is ready
-        stills.forEach(function (el) { el.srcset = el.dataset.srcset; el.src = el.dataset.src; el.sizes = '100vw'; });
+
+      var init = function () {
+        if (initialized) return;
+        initialized = true;
+        // Load the photos once hero media engine starts
+        stills.forEach(function (el) {
+          if (el.dataset.srcset) el.srcset = el.dataset.srcset;
+          if (el.dataset.src) el.src = el.dataset.src;
+          el.sizes = '100vw';
+        });
         show();
-      });
+      };
+
+      if (!video.src && video.dataset.src) {
+        video.src = video.dataset.src;
+      }
+
+      if (video.readyState >= 2) {
+        init();
+      } else {
+        video.addEventListener('loadeddata', init, { once: true });
+        video.addEventListener('canplay', init, { once: true });
+        // Fallback watchdog to ensure video never hangs if browser suppresses media events
+        setTimeout(init, 350);
+        video.load();
+      }
     }
   }
 
