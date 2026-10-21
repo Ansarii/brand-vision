@@ -543,34 +543,22 @@ body.modal-open {
 }
 
 /* ==========================================================================
-   Footer bottom alignment (Global - Desktop & Mobile):
-   Ensures copyright, attribution, and policy links are symmetrically centered.
+   Pattern B: The Centered Editorial Stack (Luxury Brands & Design Studios)
+   Row 1: Functional Policy Links
+   Row 2: Client Copyright
+   Row 3: Agency Colophon Signature (Neon Innovation Lab)
    ========================================================================== */
 .footer-bottom-bar {
-  padding-top: 26px !important;
+  padding-top: 28px !important;
   border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  gap: 12px !important;
-  font-size: 0.85rem !important;
-  color: #64748b !important;
+  gap: 10px !important;
   width: 100% !important;
   padding-right: 0 !important;
-}
-
-.footer-bottom-copy {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  flex-wrap: wrap !important;
-  gap: 6px !important;
-  text-align: center !important;
-  width: 100% !important;
-  color: #94a3b8 !important;
-  font-size: 0.86rem !important;
 }
 
 .footer-bottom-nav {
@@ -582,14 +570,54 @@ body.modal-open {
   width: 100% !important;
 }
 
+.footer-bottom-copy {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  color: #94a3b8 !important;
+  font-size: 0.84rem !important;
+  letter-spacing: 0.01em !important;
+}
+
+.footer-bottom-credit {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  color: #64748b !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.02em !important;
+}
+
+.footer-credit-link {
+  color: #ffaa66 !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  margin-left: 3px !important;
+  transition: color 0.2s ease, text-decoration 0.2s ease !important;
+}
+
+.footer-credit-link:hover,
+.footer-credit-link:focus-visible {
+  color: #ffffff !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+}
+
 @media (max-width: 820px) {
   .footer-bottom-bar {
-    gap: 14px !important;
-    padding-top: 20px !important;
+    gap: 12px !important;
+    padding-top: 22px !important;
     margin-bottom: 50px !important;
   }
   .footer-bottom-copy {
-    font-size: 0.82rem !important;
+    font-size: 0.80rem !important;
+  }
+  .footer-bottom-credit {
+    font-size: 0.76rem !important;
   }
   .footer-bottom-nav {
     gap: 8px 10px !important;
