@@ -725,7 +725,7 @@ function initAdVisualizer() {
 
     // 5. Typography: brand name, accent rule, punchline. Two text colours only.
     const brandName = ((nameInput && nameInput.value.trim()) || 'YOUR BRAND').toUpperCase();
-    const punchline = ((taglineInput && taglineInput.value.trim()) || 'ARRIVING SOON IN HYDERABAD').toUpperCase();
+    const punchline = ((taglineInput && taglineInput.value.trim()) || 'EXPANDING ACROSS SOUTH INDIA').toUpperCase();
 
     const maxTextW = bw * 0.80;
     const brandStart = Math.min(bh * 0.34, bw * 0.22);
@@ -1019,7 +1019,7 @@ function initLightbox() {
       const chips = Array.from(card.querySelectorAll('.live-spec-chip')).map(c => c.textContent.trim());
 
       const title = titleEl ? titleEl.textContent : 'On-Site Video Footage';
-      const loc = locEl ? locEl.textContent : 'Hyderabad Prime Corridors';
+      const loc = locEl ? locEl.textContent : 'Prime Commercial Corridors';
       const tag = tagEl ? tagEl.textContent : 'Digital Video';
 
       if (vidEl && vidSrc && modalVideo) {
@@ -1429,7 +1429,7 @@ function initModernContactForm() {
 
 /* ==========================================================================
    Brand Vision AI Automated Support Engine (2026)
-   Trained on Hyderabad Outdoor Media, RGIA Airport, Kokapet & Direct Rates
+   Trained on Outdoor Media, RGIA Airport, Telangana, AP, Bengaluru & Direct Rates
    ========================================================================== */
 function initAIChatSupport() {
   const launcher = document.getElementById('bv-chat-launcher');
@@ -1450,7 +1450,7 @@ function initAIChatSupport() {
   const SVG_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
   const SVG_EXTERNAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
 
-  // Comprehensive Hyderabad Outdoor Media Knowledge Base
+  // Comprehensive Outdoor Media Knowledge Base
   const BV_KNOWLEDGE = [
     {
       id: 'greeting',
@@ -1458,7 +1458,7 @@ function initAIChatSupport() {
         'hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening',
         'namaste', 'start', 'help', 'who are you', 'what is this'
       ],
-      reply: 'Hello! Welcome to <strong>Brand Vision Media</strong>. Are you looking for billboard availability across Hyderabad, commercial rate estimates, or execution timelines?<br><br>Tell me your preferred corridor, campaign duration, or brand name, and our planning desk will assist you directly.',
+      reply: 'Hello! Welcome to <strong>Brand Vision Media</strong>. Are you looking for billboard and screen availability across Telangana, Andhra Pradesh, Bengaluru, or other major Indian cities?<br><br>Tell me your preferred corridor, campaign duration, or brand name, and our planning desk will assist you directly.',
       chips: [
         { label: 'Check Site Availability', prompt: 'Check site availability by location' },
         { label: 'Pricing & Estimates', prompt: 'How do billboard and airport rates work?' },
@@ -1472,7 +1472,7 @@ function initAIChatSupport() {
         'corridors', 'where', 'vacant', 'open sites', 'inventory', 'check site availability by location',
         'location'
       ],
-      reply: '<strong>Live Inventory & Site Availability</strong>:<br>Our media planning desk maintains active inventory across Hyderabad\'s highest-traffic commercial corridors:<ul><li><strong>IT &amp; Financial Corridors:</strong> Hitec City, Gachibowli, Financial District, and Nanakramguda.</li><li><strong>Arterial Expressways:</strong> Outer Ring Road (ORR), Jubilee Hills, and Banjara Hills.</li><li><strong>Transit &amp; Airport Routes:</strong> Airport approach highways, concourses, and terminal touchpoints.</li></ul>Share your target areas and campaign dates below to receive current availability and site options within <strong>2 hours</strong>.',
+      reply: '<strong>Live Inventory & Site Availability</strong>:<br>Our media planning desk maintains active inventory across Telangana and Andhra Pradesh, prime presence in Bengaluru, and verified networks across major Indian cities:<ul><li><strong>Telangana &amp; Hyderabad Corridors:</strong> Hitec City, Gachibowli, Financial District, Kokapet, and Outer Ring Road (ORR).</li><li><strong>Andhra Pradesh Corridors:</strong> High-traffic arterial corridors in Vijayawada, Visakhapatnam, and key commercial hubs.</li><li><strong>Bengaluru &amp; Pan-India Metros:</strong> Prime tech corridors, arterial flyovers, and major transit routes.</li><li><strong>Airport Transit Routes:</strong> Rajiv Gandhi International Airport (RGIA) concourses, baggage carousels, and approach expressways.</li></ul>Share your target areas and campaign dates below to receive current availability and site options within <strong>2 hours</strong>.',
       chips: [
         { label: 'Browse Location Directory', href: '#locations' },
         { label: 'Request Availability Check', href: '#contact' },
@@ -1580,7 +1580,7 @@ function initAIChatSupport() {
         'rate card', 'charges', 'discount', 'packages', 'deal', 'how do billboard and airport rates work',
         'pricing & custom proposal', 'rates & pricing'
       ],
-      reply: '<strong>Transparent Media Network Pricing</strong>:<br>Brand Vision provides direct access to prime airport and arterial outdoor media across Hyderabad, Bangalore, and South India with transparent, competitive rates.<ul><li><strong>Tenures:</strong> 15-day campaign sprints, 30-day standard flights, quarterly (90-day), and annual partnerships.</li><li><strong>Formal Proposal:</strong> Submit your brand and corridor to receive a complete proposal with site availability, GPS coordinates, and technical specs within <strong>2 hours</strong>.</li></ul>',
+      reply: '<strong>Transparent Media Network Pricing</strong>:<br>Brand Vision provides direct access to prime airport and arterial outdoor media across Telangana, Andhra Pradesh, Bengaluru, and major Indian cities with transparent, competitive rates.<ul><li><strong>Tenures:</strong> 15-day campaign sprints, 30-day standard flights, quarterly (90-day), and annual partnerships.</li><li><strong>Formal Proposal:</strong> Submit your brand and corridor to receive a complete proposal with site availability, GPS coordinates, and technical specs within <strong>2 hours</strong>.</li></ul>',
       chips: [
         { label: 'Request Custom Rate Card', href: '#contact' },
         { label: 'Chat on WhatsApp', href: 'https://wa.me/919885335559' },
@@ -1661,7 +1661,7 @@ function initAIChatSupport() {
         'bangalore', 'bengaluru', 'karnataka', 'multi city', 'multicity', 'other cities', 'other locations',
         'pan india', 'south india', 'multiple cities', 'expansion'
       ],
-      reply: 'Brand Vision manages prime outdoor media campaigns across <strong>Hyderabad, Bangalore, and major South Indian business corridors</strong>. While Hyderabad represents our flagship core network, our planning desk coordinates direct multi-city brand campaigns with verified prime inventory.',
+      reply: 'Brand Vision executes high-impact outdoor media campaigns across <strong>major cities of India</strong>, with our primary flagship inventory across <strong>Telangana and Andhra Pradesh</strong>, active media presence in <strong>Bengaluru (Karnataka)</strong>, and verified networks across key commercial metros. Our planning desk coordinates multi-city brand campaigns with single-window accountability, verified traffic metrics, and direct rates.',
       chips: [
         { label: 'Multi-City Plan Inquiry', href: '#contact' },
         { label: 'Browse Flagship Sites', href: '#locations' },

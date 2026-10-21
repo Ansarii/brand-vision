@@ -17,3 +17,8 @@ __pycache__/
 board_region.jpg
 test_*.jpg
 test_*.png
+
+# Invoices & client documents (confidential)
+*Invoice*
+Brand_Vision_Media_Invoice_*
+
