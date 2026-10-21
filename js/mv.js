@@ -8,69 +8,104 @@
   setHdr();
   window.addEventListener('resize', setHdr);
 
-  // Hero: one video, then two photos, fading from one to the next
-  var video = document.querySelector('.mv-hero-video');
-  var stills = [].slice.call(document.querySelectorAll('.mv-hero-still'));
-  if (video) {
-    var conn = navigator.connection || {};
-    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches || conn.saveData || /2g/.test(conn.effectiveType || '');
-    if (!calm) {
-      var slides = [video].concat(stills), idx = 0, timer = null, initialized = false;
-      var hideAll = function () { slides.forEach(function (el) { el.classList.remove('on'); }); };
-      var next = function () { idx = (idx + 1) % slides.length; show(); };
-      var show = function () {
-        clearTimeout(timer);
-        hideAll();
-        var el = slides[idx];
-        if (el === video) {
-          video.currentTime = 0;
-          video.classList.add('on');
-          var playPromise = video.play();
-          if (playPromise && typeof playPromise.then === 'function') {
-            playPromise.catch(function () {
-              // If browser blocked autoplay, wait for first interaction or advance smoothly
-              var unlock = function () {
-                video.play();
-                window.removeEventListener('pointerdown', unlock);
-                window.removeEventListener('scroll', unlock);
-              };
-              window.addEventListener('pointerdown', unlock, { once: true, passive: true });
-              window.addEventListener('scroll', unlock, { once: true, passive: true });
-              timer = setTimeout(next, 5000);
-            });
+  // Hero: 2 videos and 2 photos cycling seamlessly
+  var heroMedia = document.querySelector('.mv-hero-media');
+  if (heroMedia) {
+    var slides = [].slice.call(heroMedia.querySelectorAll('.mv-hero-video, .mv-hero-still'));
+    var videos = [].slice.call(heroMedia.querySelectorAll('.mv-hero-video'));
+    var stills = [].slice.call(heroMedia.querySelectorAll('.mv-hero-still'));
+    if (slides.length > 0) {
+      var conn = navigator.connection || {};
+      var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches || conn.saveData || /2g/.test(conn.effectiveType || '');
+      if (!calm) {
+        var idx = 0, timer = null, initialized = false;
+        var hideAll = function () {
+          slides.forEach(function (el) { el.classList.remove('on'); });
+        };
+        var next = function () {
+          idx = (idx + 1) % slides.length;
+          show();
+        };
+        var show = function () {
+          clearTimeout(timer);
+          var el = slides[idx];
+          videos.forEach(function (v) {
+            if (v !== el) {
+              try { v.pause(); } catch (e) {}
+            }
+          });
+          hideAll();
+          el.classList.add('on');
+          if (el.tagName === 'VIDEO') {
+            if (!el.src && el.dataset.src) {
+              el.src = el.dataset.src;
+              el.load();
+            }
+            try { el.currentTime = 0; } catch (e) {}
+            var p = el.play();
+            // Video display duration: naturally ends at ~10s or safety timer at 9500ms
+            timer = setTimeout(next, 9500);
+            if (p && typeof p.then === 'function') {
+              p.catch(function () {
+                clearTimeout(timer);
+                var unlock = function () {
+                  el.play();
+                  window.removeEventListener('pointerdown', unlock);
+                  window.removeEventListener('scroll', unlock);
+                };
+                window.addEventListener('pointerdown', unlock, { once: true, passive: true });
+                window.addEventListener('scroll', unlock, { once: true, passive: true });
+                timer = setTimeout(next, 5000);
+              });
+            }
+          } else {
+            // High-resolution still photo: display for 5.5 seconds
+            timer = setTimeout(next, 5500);
+          }
+        };
+
+        videos.forEach(function (v) {
+          v.addEventListener('ended', function () {
+            if (slides[idx] === v) {
+              clearTimeout(timer);
+              next();
+            }
+          });
+        });
+
+        var init = function () {
+          if (initialized) return;
+          initialized = true;
+          stills.forEach(function (el) {
+            if (el.dataset.srcset) el.srcset = el.dataset.srcset;
+            if (el.dataset.src) el.src = el.dataset.src;
+            el.sizes = '100vw';
+          });
+          videos.forEach(function (v, i) {
+            if (i > 0 && !v.src && v.dataset.src) {
+              v.src = v.dataset.src;
+              v.preload = 'metadata';
+            }
+          });
+          show();
+        };
+
+        var primaryVideo = videos[0];
+        if (primaryVideo) {
+          if (!primaryVideo.src && primaryVideo.dataset.src) {
+            primaryVideo.src = primaryVideo.dataset.src;
+          }
+          if (primaryVideo.readyState >= 2) {
+            init();
+          } else {
+            primaryVideo.addEventListener('loadeddata', init, { once: true });
+            primaryVideo.addEventListener('canplay', init, { once: true });
+            setTimeout(init, 350);
+            primaryVideo.load();
           }
         } else {
-          video.pause();
-          el.classList.add('on');
-          timer = setTimeout(next, 5500);
+          init();
         }
-      };
-      video.addEventListener('ended', next);
-
-      var init = function () {
-        if (initialized) return;
-        initialized = true;
-        // Load the photos once hero media engine starts
-        stills.forEach(function (el) {
-          if (el.dataset.srcset) el.srcset = el.dataset.srcset;
-          if (el.dataset.src) el.src = el.dataset.src;
-          el.sizes = '100vw';
-        });
-        show();
-      };
-
-      if (!video.src && video.dataset.src) {
-        video.src = video.dataset.src;
-      }
-
-      if (video.readyState >= 2) {
-        init();
-      } else {
-        video.addEventListener('loadeddata', init, { once: true });
-        video.addEventListener('canplay', init, { once: true });
-        // Fallback watchdog to ensure video never hangs if browser suppresses media events
-        setTimeout(init, 350);
-        video.load();
       }
     }
   }
