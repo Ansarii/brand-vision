@@ -311,6 +311,8 @@ function initCoralNav() {
     if (drawer) {
       drawer.classList.add('active');
       drawer.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('modal-open');
+      document.body.classList.add('modal-open');
       document.body.style.overflow = 'hidden';
     }
     if (toggle) toggle.setAttribute('aria-expanded', 'true');
@@ -322,7 +324,12 @@ function initCoralNav() {
     if (drawer) {
       drawer.classList.remove('active');
       drawer.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+      const hasOther = document.querySelector('.doc-modal-overlay.active, .modal-overlay.active');
+      if (!hasOther) {
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+      }
     }
     if (toggle) toggle.setAttribute('aria-expanded', 'false');
     lockToggle();
@@ -339,7 +346,12 @@ function initCoralNav() {
         toggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
       }
       if (!isActive) {
-        document.body.style.overflow = '';
+        const hasOther = document.querySelector('.doc-modal-overlay.active, .modal-overlay.active');
+        if (!hasOther) {
+          document.documentElement.classList.remove('modal-open');
+          document.body.classList.remove('modal-open');
+          document.body.style.overflow = '';
+        }
       }
     });
     drawerObserver.observe(drawer, { attributes: true, attributeFilter: ['class'] });
@@ -958,7 +970,12 @@ function initLightbox() {
 
   const closeModal = () => {
     if (overlay) overlay.classList.remove('active');
-    document.body.style.overflow = '';
+    const hasOther = document.querySelector('.doc-modal-overlay.active, .coral-drawer-overlay.active');
+    if (!hasOther) {
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
+    }
     if (modalVideo) {
       modalVideo.pause();
       modalVideo.removeAttribute('src');
@@ -1023,6 +1040,8 @@ function initLightbox() {
       }
 
       if (overlay) overlay.classList.add('active');
+      document.documentElement.classList.add('modal-open');
+      document.body.classList.add('modal-open');
       document.body.style.overflow = 'hidden';
     });
   });
@@ -1066,6 +1085,8 @@ function initLightbox() {
       }
 
       if (overlay) overlay.classList.add('active');
+      document.documentElement.classList.add('modal-open');
+      document.body.classList.add('modal-open');
       document.body.style.overflow = 'hidden';
     });
   });
@@ -2085,6 +2106,8 @@ function initDocViewer() {
   function openDocModal(targetTab) {
     switchTab(targetTab);
     modalOverlay.classList.add('active');
+    document.documentElement.classList.add('modal-open');
+    document.body.classList.add('modal-open');
     document.body.style.overflow = 'hidden';
 
     // If navigation drawer is open, close it cleanly
@@ -2103,7 +2126,12 @@ function initDocViewer() {
 
   function closeDocModal() {
     modalOverlay.classList.remove('active');
-    document.body.style.overflow = '';
+    const hasOther = document.querySelector('.modal-overlay.active, .coral-drawer-overlay.active');
+    if (!hasOther) {
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
+    }
   }
 
   // Trigger buttons across bottom nav bar and navigation drawer
@@ -2133,6 +2161,12 @@ function initDocViewer() {
       closeDocModal();
     }
   });
+
+  modalOverlay.addEventListener('wheel', (e) => {
+    if (e.target === modalOverlay) {
+      e.preventDefault();
+    }
+  }, { passive: false });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {

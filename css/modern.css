@@ -515,6 +515,34 @@ img[loading="lazy"] { background: #ebe7f2; }
 }
 
 /* ==========================================================================
+   Modal Background Scroll Lock & Overscroll Chaining Prevention
+   Prevents background page from scrolling when modals or drawer are open.
+   ========================================================================== */
+html.modal-open,
+body.modal-open {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+
+.doc-modal-overlay,
+.modal-overlay,
+.coral-drawer-overlay {
+  overscroll-behavior: contain !important;
+  touch-action: pan-y;
+}
+
+.doc-modal-card,
+.modal-card,
+.coral-drawer {
+  overscroll-behavior: contain !important;
+}
+
+.doc-modal-body {
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ==========================================================================
    Footer bottom alignment (Global - Desktop & Mobile):
    Ensures copyright, attribution, and policy links are symmetrically centered.
    ========================================================================== */
