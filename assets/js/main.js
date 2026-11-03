@@ -1624,7 +1624,7 @@ function initAIChatSupport() {
         'rate card', 'charges', 'discount', 'packages', 'deal', 'how do billboard and airport rates work',
         'pricing & custom proposal', 'rates & pricing'
       ],
-      reply: '<strong>Transparent Media Network Pricing</strong>:<br>Brand Vision provides direct access to prime airport and arterial outdoor media across Hyderabad, Bangalore, and South India with transparent, competitive rates.<ul><li><strong>Tenures:</strong> 15-day campaign sprints, 30-day standard flights, quarterly (90-day), and annual partnerships.</li><li><strong>Formal Proposal:</strong> Submit your brand and corridor to receive a complete proposal with site availability, GPS coordinates, and technical specs within <strong>2 hours</strong>.</li></ul>',
+      reply: '<strong>Transparent Media Network Pricing</strong>:<br>Brand Vision provides direct access to prime airport and arterial outdoor media across Hyderabad, Telangana, and South India with transparent, competitive rates.<ul><li><strong>Tenures:</strong> 15-day campaign sprints, 30-day standard flights, quarterly (90-day), and annual partnerships.</li><li><strong>Formal Proposal:</strong> Submit your brand and corridor to receive a complete proposal with site availability, GPS coordinates, and technical specs within <strong>2 hours</strong>.</li></ul>',
       chips: [
         { label: 'Request Custom Rate Card', href: '#contact' },
         { label: 'Chat on WhatsApp', href: 'https://wa.me/919885335559' },
@@ -1700,12 +1700,12 @@ function initAIChatSupport() {
       ]
     },
     {
-      id: 'multicity_bangalore',
+      id: 'multicity_expansion',
       patterns: [
-        'bangalore', 'bengaluru', 'karnataka', 'multi city', 'multicity', 'other cities', 'other locations',
+        'multi city', 'multicity', 'other cities', 'other locations',
         'pan india', 'south india', 'multiple cities', 'expansion'
       ],
-      reply: 'Brand Vision manages prime outdoor media campaigns across <strong>Hyderabad, Bangalore, and major South Indian business corridors</strong>. While Hyderabad represents our flagship core network, our planning desk coordinates direct multi-city brand campaigns with verified prime inventory.',
+      reply: 'Brand Vision manages prime outdoor media campaigns across <strong>Hyderabad, Andhra Pradesh, and major South Indian business corridors</strong>. While Hyderabad represents our flagship core network, our planning desk coordinates direct multi-city brand campaigns with verified prime inventory.',
       chips: [
         { label: 'Multi-City Plan Inquiry', href: '#contact' },
         { label: 'Browse Flagship Sites', href: '#locations' },

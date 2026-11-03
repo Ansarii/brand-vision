@@ -22,3 +22,5 @@ test_*.png
 *Invoice*
 Brand_Vision_Media_Invoice_*
 
+.vercel
+.env*
