@@ -543,27 +543,76 @@ body.modal-open {
 }
 
 /* ==========================================================================
-   Footer Bottom Bar - Modern Agency Balanced Triad Layout
-   Desktop (> 1080px): Balanced 3-column single-row triad (Left, Center, Right)
-   - Left: Copyright statement
-   - Center: Policy & Document Links
-   - Right: Agency Colophon Signature (Neon Innovation Lab)
-   Tablet (641px - 1080px): Clean 2-tier split (Nav pills top, Copy/Credit split bottom)
-   Mobile (<= 640px): Clean 3-tier centered vertical hierarchy with touch-friendly pills
+   Footer Bottom Bar - Option 1: 2-Tier Stacked Layout
+   Desktop (> 900px):
+   - Tier 1: Centered Policy Navigation Links with ample breathing room
+   - Divider: Subtle gradient separator
+   - Tier 2: Split row (Left: Copyright | Right: Agency Credit)
+   Tablet & Mobile (<= 900px / <= 640px):
+   - Preserves tactile pill buttons, centered copyright, and agency credit
    ========================================================================== */
 .footer-bottom-bar {
-  padding-top: 26px !important;
+  padding-top: 28px !important;
   padding-bottom: 24px !important;
   border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 18px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding-right: 0 !important;
+}
+
+.footer-bottom-nav {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important;
+  gap: 28px !important;
+  width: 100% !important;
+}
+
+.footer-bottom-nav-btn {
+  background: transparent !important;
+  border: none !important;
+  color: #cbd5e1 !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  padding: 4px 6px !important;
+  cursor: pointer !important;
+  transition: color 0.2s ease !important;
+  border-radius: 4px !important;
+  font-family: inherit !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
+
+.footer-bottom-nav-btn:hover,
+.footer-bottom-nav-btn:focus-visible {
+  color: #ffaa66 !important;
+}
+
+.footer-bottom-nav-sep {
+  display: none !important;
+}
+
+.footer-bottom-divider {
+  height: 1px !important;
+  width: 100% !important;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 20%, rgba(255, 255, 255, 0.12) 80%, transparent 100%) !important;
+  border: none !important;
+  margin: 0 !important;
+}
+
+.footer-bottom-meta-row {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
   justify-content: space-between !important;
-  flex-wrap: nowrap !important;
-  gap: 20px !important;
   width: 100% !important;
-  box-sizing: border-box !important;
-  padding-right: 0 !important;
+  gap: 20px !important;
 }
 
 .footer-bottom-copy {
@@ -577,42 +626,6 @@ body.modal-open {
   font-size: 0.84rem !important;
   letter-spacing: 0.01em !important;
   white-space: nowrap !important;
-}
-
-.footer-bottom-nav {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  flex-wrap: nowrap !important;
-  gap: 8px 12px !important;
-  flex: 0 0 auto !important;
-  width: auto !important;
-}
-
-.footer-bottom-nav-btn {
-  background: transparent !important;
-  border: none !important;
-  color: #94a3b8 !important;
-  font-size: 0.84rem !important;
-  font-weight: 500 !important;
-  padding: 4px 6px !important;
-  cursor: pointer !important;
-  transition: color 0.18s ease !important;
-  border-radius: 4px !important;
-  font-family: inherit !important;
-  text-decoration: none !important;
-  white-space: nowrap !important;
-}
-
-.footer-bottom-nav-btn:hover,
-.footer-bottom-nav-btn:focus-visible {
-  color: #ffffff !important;
-}
-
-.footer-bottom-nav-sep {
-  color: rgba(148, 163, 184, 0.4) !important;
-  font-size: 0.72rem !important;
-  user-select: none !important;
 }
 
 .footer-bottom-credit {
@@ -630,40 +643,31 @@ body.modal-open {
 
 .footer-credit-link {
   color: #ffffff !important;
-  text-decoration: underline !important;
-  text-decoration-color: rgba(255, 255, 255, 0.4) !important;
-  text-underline-offset: 3px !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(255, 170, 102, 0.45) !important;
+  padding-bottom: 1px !important;
   font-weight: 600 !important;
   margin-left: 4px !important;
-  transition: text-decoration-color 0.2s ease, opacity 0.2s ease !important;
+  transition: all 0.2s ease !important;
 }
 
 .footer-credit-link:hover,
 .footer-credit-link:focus-visible {
-  color: #ffffff !important;
-  text-decoration-color: #ffffff !important;
-  opacity: 0.95 !important;
+  color: #ffaa66 !important;
+  border-bottom-color: #ffaa66 !important;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 900px) {
   .footer-bottom-bar {
-    flex-wrap: wrap !important;
-    justify-content: space-between !important;
-    gap: 16px 20px !important;
+    gap: 16px !important;
     padding-top: 22px !important;
     padding-bottom: 26px !important;
   }
   .footer-bottom-nav {
-    order: 1 !important;
-    flex: 0 0 100% !important;
-    width: 100% !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
     gap: 8px 10px !important;
     padding-bottom: 4px !important;
-  }
-  .footer-bottom-nav-sep {
-    display: none !important;
   }
   .footer-bottom-nav-btn {
     background: rgba(255, 255, 255, 0.08) !important;
@@ -685,29 +689,27 @@ body.modal-open {
     border-color: rgba(255, 255, 255, 0.28) !important;
     color: #ffffff !important;
   }
+  .footer-bottom-divider {
+    display: none !important;
+  }
+  .footer-bottom-meta-row {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+  }
   .footer-bottom-copy {
-    order: 2 !important;
-    flex: 1 1 auto !important;
     justify-content: flex-start !important;
     text-align: left !important;
     font-size: 0.82rem !important;
-    white-space: normal !important;
   }
   .footer-bottom-credit {
-    order: 3 !important;
-    flex: 1 1 auto !important;
     justify-content: flex-end !important;
     text-align: right !important;
     font-size: 0.82rem !important;
-    white-space: normal !important;
   }
 }
 
 @media (max-width: 640px) {
   .footer-bottom-bar {
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
     gap: 14px !important;
     padding-top: 20px !important;
     padding-bottom: 24px !important;
@@ -715,14 +717,22 @@ body.modal-open {
   }
   .footer-bottom-nav {
     order: 1 !important;
-    flex: 0 0 auto !important;
-    width: 100% !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
     gap: 8px 10px !important;
   }
-  .footer-bottom-copy {
+  .footer-bottom-divider {
+    display: none !important;
+  }
+  .footer-bottom-meta-row {
     order: 2 !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .footer-bottom-copy {
+    order: 1 !important;
     justify-content: center !important;
     text-align: center !important;
     width: 100% !important;
@@ -730,7 +740,7 @@ body.modal-open {
     white-space: normal !important;
   }
   .footer-bottom-credit {
-    order: 3 !important;
+    order: 2 !important;
     justify-content: center !important;
     text-align: center !important;
     width: 100% !important;
